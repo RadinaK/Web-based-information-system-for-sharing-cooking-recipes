@@ -1,13 +1,10 @@
-package bg.tuplovdiv.cookingrecipes.domain.models.users;
+package bg.tuplovdiv.cookingrecipes.domain.entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String email;
@@ -19,14 +16,6 @@ public class User {
     private String password;
 
     public User() {}
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;

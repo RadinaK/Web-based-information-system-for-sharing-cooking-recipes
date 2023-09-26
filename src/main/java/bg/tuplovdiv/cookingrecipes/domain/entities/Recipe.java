@@ -1,7 +1,7 @@
-package bg.tuplovdiv.cookingrecipes.domain.models.recipes;
+package bg.tuplovdiv.cookingrecipes.domain.entities;
 
 import bg.tuplovdiv.cookingrecipes.domain.enums.Category;
-import bg.tuplovdiv.cookingrecipes.domain.models.ingredients.Ingredient;
+import bg.tuplovdiv.cookingrecipes.domain.entities.Ingredient;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,11 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "recipes")
-public class Recipe {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Recipe extends BaseEntity {
 
     @Column(name = "title", nullable = false)
     private String title;

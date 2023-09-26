@@ -1,20 +1,11 @@
-package bg.tuplovdiv.cookingrecipes.domain.models.ingredients;
-
-import bg.tuplovdiv.cookingrecipes.domain.models.allergies.Allergy;
-import bg.tuplovdiv.cookingrecipes.domain.models.measureunits.MeasureUnit;
-import bg.tuplovdiv.cookingrecipes.domain.models.nutritionfacts.NutritionFact;
-import bg.tuplovdiv.cookingrecipes.domain.models.recipes.Recipe;
+package bg.tuplovdiv.cookingrecipes.domain.entities;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "ingredients")
-public class Ingredient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Ingredient extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;

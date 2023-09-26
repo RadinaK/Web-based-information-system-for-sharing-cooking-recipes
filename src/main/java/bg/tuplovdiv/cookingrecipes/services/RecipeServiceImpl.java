@@ -1,9 +1,10 @@
 package bg.tuplovdiv.cookingrecipes.services;
 
 
-import bg.tuplovdiv.cookingrecipes.domain.models.recipes.Recipe;
+import bg.tuplovdiv.cookingrecipes.domain.entities.Recipe;
 import bg.tuplovdiv.cookingrecipes.repositories.RecipeRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class RecipeServiceImpl implements RecipeService {
 
@@ -11,6 +12,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final ModelMapper mapper;
 
+//    @Autowired
     public RecipeServiceImpl(RecipeRepository recipeRepository, ModelMapper mapper) {
         this.recipeRepository = recipeRepository;
         this.mapper = mapper;

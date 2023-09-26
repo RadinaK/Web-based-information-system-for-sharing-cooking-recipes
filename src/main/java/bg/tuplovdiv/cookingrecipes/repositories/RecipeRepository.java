@@ -1,7 +1,7 @@
 package bg.tuplovdiv.cookingrecipes.repositories;
 
 import bg.tuplovdiv.cookingrecipes.domain.enums.Category;
-import bg.tuplovdiv.cookingrecipes.domain.models.recipes.Recipe;
+import bg.tuplovdiv.cookingrecipes.domain.entities.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
