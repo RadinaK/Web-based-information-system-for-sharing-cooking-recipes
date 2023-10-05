@@ -31,6 +31,9 @@ public class Recipe extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private RecipeCategory recipeCategory;
 
+    @ManyToOne
+    private User user;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "recipe_ingredients",
             joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),

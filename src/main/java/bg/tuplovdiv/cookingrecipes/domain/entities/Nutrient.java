@@ -7,7 +7,7 @@ import java.util.Set;
 @Table(name = "nutrients")
 public class Nutrient extends BaseEntity {
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column

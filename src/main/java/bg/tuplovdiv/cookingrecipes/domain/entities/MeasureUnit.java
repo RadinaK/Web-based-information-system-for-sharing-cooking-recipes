@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "measure_units")
 public class MeasureUnit extends BaseEntity {
 
-    @Column(name = "type", nullable = false)
+    @Column
     private String type;
 
     @Column
