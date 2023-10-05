@@ -1,11 +1,29 @@
 package bg.tuplovdiv.cookingrecipes.domain.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "measure_units")
 public class MeasureUnit extends BaseEntity {
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "type", nullable = false)
+    private String type;
+
+    @Column
+    private double quantity;
+
+    //Teaspoon = t or tsp
+    //Tablespoon = T, TB, or tbsp
+    //Cup = C or c
+    //Pint = pt
+    //Quart = qt
+    //Gallon = gal
+    //Ounce = oz
+    //Fluid ounce = fl oz
+    //Pound = lb
+
+    //Milliliter = mL
+    //Liter = L or l
+    //Gram = g
+    //Kilogram = kg
 }

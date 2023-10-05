@@ -1,43 +1,119 @@
 package bg.tuplovdiv.cookingrecipes.domain.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
 
-    @Column(nullable = false)
-    private String email;
-
-    @Column(nullable = false)
+    @Column
     private String username;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
-    public User() {}
+    @Column
+    private String firstName;
 
-    public String getEmail() {
-        return email;
-    }
+    @Column
+    private String lastName;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @Column
+    private Boolean isActive;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    private List<UserRole> role; //user's role (User or Admin).
+
+    @Column
+    private String imageUrl;
+
+    @Column
+    private Date created;
+
+    @Column
+    private Date modified;
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public User setActive(Boolean active) {
+        isActive = active;
+        return this;
+    }
+
+    public List<UserRole> getRole() {
+        return role;
+    }
+
+    public User setRole(List<UserRole> role) {
+        this.role = role;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public User setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public User setCreated(Date created) {
+        this.created = created;
+        return this;
+    }
+
+    public Date getModified() {
+        return modified;
+    }
+
+    public User setModified(Date modified) {
+        this.modified = modified;
+        return this;
     }
 }

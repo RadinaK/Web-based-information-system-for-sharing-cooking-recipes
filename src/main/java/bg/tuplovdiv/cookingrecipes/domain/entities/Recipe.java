@@ -1,9 +1,8 @@
 package bg.tuplovdiv.cookingrecipes.domain.entities;
 
-import bg.tuplovdiv.cookingrecipes.domain.enums.Category;
-import bg.tuplovdiv.cookingrecipes.domain.entities.Ingredient;
+import bg.tuplovdiv.cookingrecipes.domain.enums.RecipeCategory;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -11,7 +10,7 @@ import java.util.Set;
 @Table(name = "recipes")
 public class Recipe extends BaseEntity {
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", unique = true, nullable = false)
     private String title;
 
     @Column(name = "cooking_time", nullable = false)
@@ -27,11 +26,10 @@ public class Recipe extends BaseEntity {
     private LocalDate publishedDate;
 
     @Column
-    private String image;
+    private String imageUrl;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column
-    private Category category;
+    @Enumerated(EnumType.STRING)
+    private RecipeCategory recipeCategory;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "recipe_ingredients",

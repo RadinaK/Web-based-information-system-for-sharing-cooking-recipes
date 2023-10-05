@@ -1,24 +1,28 @@
 package bg.tuplovdiv.cookingrecipes.domain.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
 
 @MappedSuperclass
 public abstract class BaseEntity {
 
-    private Long id;
-
-    protected BaseEntity() {
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public Long getId() {
-        return this.id;
+    @GeneratedValue(generator = "uuid-string")
+    @GenericGenerator(name = "uuid-string",
+            strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
+
+    public BaseEntity() {
     }
 
-    public void setId(Long id) {
+    public String getId() {
+        return id;
+    }
+
+    public BaseEntity setId(String id) {
         this.id = id;
+        return this;
     }
 }
-
