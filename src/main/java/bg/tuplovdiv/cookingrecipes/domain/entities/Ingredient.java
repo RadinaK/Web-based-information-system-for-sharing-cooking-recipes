@@ -37,8 +37,8 @@ public class Ingredient extends BaseEntity {
 //            joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "nutrient_id", referencedColumnName = "id"))
 //    private Set<Nutrient> nutrients;
-    @OneToOne
-    private Nutrient nutrients;
+    @OneToMany
+    private Set<Nutrient> nutrients;
 
     public Ingredient() {
     }
@@ -97,16 +97,16 @@ public class Ingredient extends BaseEntity {
         return this;
     }
 
-    public Nutrient getNutrients() {
+    public Set<Nutrient> getNutrients() {
         return nutrients;
     }
 
-    public Ingredient setNutrients(Nutrient nutrients) {
+    public Ingredient setNutrients(Set<Nutrient> nutrients) {
         this.nutrients = nutrients;
         return this;
     }
 
-//    public Set<Nutrient> getNutrients() {
+    //    public Set<Nutrient> getNutrients() {
 //        return nutrients;
 //    }
 //
