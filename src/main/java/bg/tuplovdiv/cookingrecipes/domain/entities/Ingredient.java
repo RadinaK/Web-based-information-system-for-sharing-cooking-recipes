@@ -36,4 +36,70 @@ public class Ingredient extends BaseEntity {
 //    private Set<Nutrient> nutrients;
     @OneToOne
     private Nutrient nutrients;
+
+    public Ingredient() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Ingredient setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public Ingredient setQuantity(double quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public Allergy getAllergy() {
+        return allergy;
+    }
+
+    public Ingredient setAllergy(Allergy allergy) {
+        this.allergy = allergy;
+        return this;
+    }
+
+    public NutritionFact getNutritionFact() {
+        return nutritionFact;
+    }
+
+    public Ingredient setNutritionFact(NutritionFact nutritionFact) {
+        this.nutritionFact = nutritionFact;
+        return this;
+    }
+
+    public MeasureUnit getMeasureUnit() {
+        return measureUnit;
+    }
+
+    public Ingredient setMeasureUnit(MeasureUnit measureUnit) {
+        this.measureUnit = measureUnit;
+        return this;
+    }
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public Ingredient setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+        return this;
+    }
+
+    public Nutrient getNutrients() {
+        return nutrients;
+    }
+
+    public Ingredient setNutrients(Nutrient nutrients) {
+        this.nutrients = nutrients;
+        return this;
+    }
 }

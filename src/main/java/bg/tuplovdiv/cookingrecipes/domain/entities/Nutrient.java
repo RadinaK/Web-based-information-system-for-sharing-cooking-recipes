@@ -17,4 +17,25 @@ public class Nutrient extends BaseEntity {
 //            fetch = FetchType.EAGER,
 //            cascade = CascadeType.ALL)
 //    public Set<Ingredient> ingredients;
+
+    public Nutrient() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Nutrient setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public Nutrient setQuantity(double quantity) {
+        this.quantity = quantity;
+        return this;
+    }
 }

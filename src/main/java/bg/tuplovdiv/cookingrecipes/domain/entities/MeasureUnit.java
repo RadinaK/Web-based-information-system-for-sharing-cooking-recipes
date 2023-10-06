@@ -12,6 +12,27 @@ public class MeasureUnit extends BaseEntity {
     @Column
     private double quantity;
 
+    public MeasureUnit() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public MeasureUnit setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public MeasureUnit setQuantity(double quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
     //Teaspoon = t or tsp
     //Tablespoon = T, TB, or tbsp
     //Cup = C or c
