@@ -12,8 +12,11 @@ public class Ingredient extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+//    @Column
+//    private double quantity;
+
     @Column
-    private double quantity;
+    private double calories;
 
     @Enumerated(EnumType.STRING)
     private Allergy allergy;
@@ -49,12 +52,12 @@ public class Ingredient extends BaseEntity {
         return this;
     }
 
-    public double getQuantity() {
-        return quantity;
+    public double getCalories() {
+        return calories;
     }
 
-    public Ingredient setQuantity(double quantity) {
-        this.quantity = quantity;
+    public Ingredient setCalories(double calories) {
+        this.calories = calories;
         return this;
     }
 
@@ -102,4 +105,13 @@ public class Ingredient extends BaseEntity {
         this.nutrients = nutrients;
         return this;
     }
+
+//    public Set<Nutrient> getNutrients() {
+//        return nutrients;
+//    }
+//
+//    public Ingredient setNutrients(Set<Nutrient> nutrients) {
+//        this.nutrients = nutrients;
+//        return this;
+//    }
 }

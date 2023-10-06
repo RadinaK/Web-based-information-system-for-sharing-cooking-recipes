@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface NutrientRepository extends JpaRepository<Nutrient, String> {
 
-    Optional<Nutrient> findByName(Nutrient name);
+//    Optional<Nutrient> findByName(Nutrient name);
 
 }
