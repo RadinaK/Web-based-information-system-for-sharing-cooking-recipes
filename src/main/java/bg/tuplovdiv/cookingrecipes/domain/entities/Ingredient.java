@@ -24,8 +24,11 @@ public class Ingredient extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private NutritionFact nutritionFact;
 
-    @OneToOne
-    private MeasureUnit measureUnit;
+//    @OneToOne
+//    private MeasureUnit measureUnit;
+
+    @OneToMany
+    private Set<MeasureUnit> measureUnit;
 
     @ManyToMany(mappedBy = "ingredients",
             fetch = FetchType.EAGER,
@@ -79,11 +82,11 @@ public class Ingredient extends BaseEntity {
         return this;
     }
 
-    public MeasureUnit getMeasureUnit() {
+    public Set<MeasureUnit> getMeasureUnit() {
         return measureUnit;
     }
 
-    public Ingredient setMeasureUnit(MeasureUnit measureUnit) {
+    public Ingredient setMeasureUnit(Set<MeasureUnit> measureUnit) {
         this.measureUnit = measureUnit;
         return this;
     }
