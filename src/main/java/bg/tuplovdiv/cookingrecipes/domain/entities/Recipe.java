@@ -14,10 +14,10 @@ public class Recipe extends BaseEntity {
     private String title;
 
     @Column(name = "cooking_time", nullable = false)
-    private int cookingTime;
+    private Integer cookingTime;
 
     @Column(name = "servings", nullable = false)
-    private int servings;
+    private Integer servings;
 
     @Column(columnDefinition = "TEXT", name = "description", nullable = false)
     private String description;
@@ -25,20 +25,24 @@ public class Recipe extends BaseEntity {
     @Column(name = "published_date", nullable = false)
     private LocalDate publishedDate;
 
-    @Column
-    private String imageUrl;
-
     @Enumerated(EnumType.STRING)
     private RecipeCategory recipeCategory;
 
     @ManyToOne
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "recipe_ingredients",
-            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
-    private Set<Ingredient> ingredients;
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "recipe_ingredients",
+//            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
+//    private Set<Ingredient> ingredients;
+//
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "recipe_measureunits",
+//            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "measureunit_id", referencedColumnName = "id"))
+//    private Set<MeasureUnit> measureUnits;
+
 
     public Recipe() {
     }
@@ -88,15 +92,6 @@ public class Recipe extends BaseEntity {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public Recipe setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-        return this;
-    }
-
     public RecipeCategory getRecipeCategory() {
         return recipeCategory;
     }
@@ -115,12 +110,4 @@ public class Recipe extends BaseEntity {
         return this;
     }
 
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public Recipe setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-        return this;
-    }
 }

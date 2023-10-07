@@ -3,6 +3,8 @@ package bg.tuplovdiv.cookingrecipes.domain.entities;
 import bg.tuplovdiv.cookingrecipes.domain.enums.MeasureUnitType;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "measure_units")
 public class MeasureUnit extends BaseEntity {
@@ -11,7 +13,12 @@ public class MeasureUnit extends BaseEntity {
     private MeasureUnitType type;
 
     @Column
-    private double quantity;
+    private Double quantity;
+
+//    @ManyToMany(mappedBy = "measureUnits",
+//            fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL)
+//    public Set<Recipe> recipes;
 
     public MeasureUnit() {
     }
@@ -20,7 +27,6 @@ public class MeasureUnit extends BaseEntity {
         this.type = type;
         return this;
     }
-
 
     public double getQuantity() {
         return quantity;
@@ -31,4 +37,7 @@ public class MeasureUnit extends BaseEntity {
         return this;
     }
 
+    public MeasureUnitType getType() {
+        return type;
+    }
 }

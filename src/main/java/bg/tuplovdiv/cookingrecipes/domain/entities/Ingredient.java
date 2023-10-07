@@ -3,7 +3,6 @@ package bg.tuplovdiv.cookingrecipes.domain.entities;
 import bg.tuplovdiv.cookingrecipes.domain.enums.Allergy;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NutritionFact;
 import jakarta.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "ingredients")
@@ -12,11 +11,8 @@ public class Ingredient extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-//    @Column
-//    private double quantity;
-
     @Column
-    private double calories;
+    private Double calories;
 
     @Enumerated(EnumType.STRING)
     private Allergy allergy;
@@ -24,24 +20,11 @@ public class Ingredient extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private NutritionFact nutritionFact;
 
-//    @OneToOne
-//    private MeasureUnit measureUnit;
 
-    @OneToMany
-    private Set<MeasureUnit> measureUnit;
-
-    @ManyToMany(mappedBy = "ingredients",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    public Set<Recipe> recipes;
-
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "ingredients_nutrients",
-//            joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "nutrient_id", referencedColumnName = "id"))
-//    private Set<Nutrient> nutrients;
-    @OneToMany
-    private Set<Nutrient> nutrients;
+//    @ManyToMany(mappedBy = "ingredients",
+//            fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL)
+//    public Set<Recipe> recipes;
 
     public Ingredient() {
     }
@@ -81,40 +64,4 @@ public class Ingredient extends BaseEntity {
         this.nutritionFact = nutritionFact;
         return this;
     }
-
-    public Set<MeasureUnit> getMeasureUnit() {
-        return measureUnit;
-    }
-
-    public Ingredient setMeasureUnit(Set<MeasureUnit> measureUnit) {
-        this.measureUnit = measureUnit;
-        return this;
-    }
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public Ingredient setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-        return this;
-    }
-
-    public Set<Nutrient> getNutrients() {
-        return nutrients;
-    }
-
-    public Ingredient setNutrients(Set<Nutrient> nutrients) {
-        this.nutrients = nutrients;
-        return this;
-    }
-
-    //    public Set<Nutrient> getNutrients() {
-//        return nutrients;
-//    }
-//
-//    public Ingredient setNutrients(Set<Nutrient> nutrients) {
-//        this.nutrients = nutrients;
-//        return this;
-//    }
 }
