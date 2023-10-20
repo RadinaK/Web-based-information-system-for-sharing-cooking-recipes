@@ -1,10 +1,9 @@
 package bg.tuplovdiv.cookingrecipes.domain.entities;
 
-import bg.tuplovdiv.cookingrecipes.domain.enums.RecipeCategory;
+import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name = "recipes")
@@ -22,14 +21,11 @@ public class Recipe extends BaseEntity {
     @Column(columnDefinition = "TEXT", name = "description", nullable = false)
     private String description;
 
-    @Column(name = "published_date", nullable = false)
-    private LocalDate publishedDate;
-
     @Enumerated(EnumType.STRING)
-    private RecipeCategory recipeCategory;
+    private NameCategory nameCategory;
 
     @ManyToOne
-    private User user;
+    private User cook;
 
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinTable(name = "recipe_ingredients",
@@ -83,30 +79,22 @@ public class Recipe extends BaseEntity {
         return this;
     }
 
-    public LocalDate getPublishedDate() {
-        return publishedDate;
+
+    public NameCategory getNameCategory() {
+        return nameCategory;
     }
 
-    public Recipe setPublishedDate(LocalDate publishedDate) {
-        this.publishedDate = publishedDate;
+    public Recipe setNameCategory(NameCategory nameCategory) {
+        this.nameCategory = nameCategory;
         return this;
     }
 
-    public RecipeCategory getRecipeCategory() {
-        return recipeCategory;
+    public User getCook() {
+        return cook;
     }
 
-    public Recipe setRecipeCategory(RecipeCategory recipeCategory) {
-        this.recipeCategory = recipeCategory;
-        return this;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Recipe setUser(User user) {
-        this.user = user;
+    public Recipe setCook(User cook) {
+        this.cook = cook;
         return this;
     }
 

@@ -17,8 +17,8 @@ public class Ingredient extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Allergy allergy;
 
-    @Enumerated(EnumType.STRING)
-    private NutritionFact nutritionFact;
+//    @Enumerated(EnumType.STRING)
+//    private NutritionFact nutritionFact;
 
 
 //    @ManyToMany(mappedBy = "ingredients",
@@ -56,12 +56,12 @@ public class Ingredient extends BaseEntity {
         return this;
     }
 
-    public NutritionFact getNutritionFact() {
-        return nutritionFact;
-    }
-
-    public Ingredient setNutritionFact(NutritionFact nutritionFact) {
-        this.nutritionFact = nutritionFact;
-        return this;
-    }
+//    public NutritionFact getNutritionFact() {
+//        return nutritionFact;
+//    }
+//
+//    public Ingredient setNutritionFact(NutritionFact nutritionFact) {
+//        this.nutritionFact = nutritionFact;
+//        return this;
+//    }
 }

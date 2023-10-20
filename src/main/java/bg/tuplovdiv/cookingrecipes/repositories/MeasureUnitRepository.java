@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface MeasureUnitRepository extends JpaRepository<MeasureUnit, Long> {
 
-    Optional<MeasureUnit> findByType(MeasureUnit type);
+    Optional<MeasureUnit> findByType(String type);//MeasureUnit?
 
 }
 

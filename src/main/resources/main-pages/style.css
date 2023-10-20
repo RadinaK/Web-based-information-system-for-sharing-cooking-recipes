@@ -1,0 +1,183 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+    nav li a {
+        text-decoration: none;
+        color: white;
+    }
+
+.website-name a {
+    text-decoration: none;
+    color:black;
+}
+
+nav li a:hover {
+    color: yellow;
+}
+
+.logo-container {
+    display: flex;
+}
+
+.website-name {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    color: black;
+    font-weight: 700;
+    margin-left: 16px;
+}
+
+.img-container {
+    height: 100px;
+    width: 150px;
+}
+
+    .img-container img {
+        height: 100%;
+        width: 100%;
+        border-radius: 15px;
+    }
+
+.nav-buttons ul {
+    display: flex;
+}
+
+.nav-buttons li {
+    list-style-type: none;
+    font-size: 28px;
+    margin-right: 42px;
+    color: white;
+}
+
+    .nav-buttons li:hover {
+        color: yellow;
+        cursor: pointer;
+    }
+
+main {
+    background-image: url("vegetables.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+    height: 90vh;
+}
+
+    main .welcome-tag {
+        margin: 0;
+        text-align: center;
+        font-size: 50px;
+        color: white;
+        padding-top: 150px;
+    }
+
+    main h1 {
+        color: white;
+        text-align: center;
+        margin: 0;
+        font-size: 40px;
+        margin-bottom: 24px;
+    }
+
+.name-container, .username-container, .pass-container {
+    display: flex;
+}
+
+.register-form, .login-form {
+    background-color: rgba(0, 0, 0,0.5);
+    border-radius: 6px;
+}
+
+    .register-form label, .login-form label {
+        color: white;
+        margin-bottom: 8px;
+    }
+
+    .register-form .input-data, .login-form .input-data {
+        display: flex;
+        flex-direction: column;
+        margin-right: 40px;
+        margin-left: 40px;
+        margin-top: 20px;
+    }
+
+.label-u-name {
+    margin-top: 18px;
+}
+
+.input-data input {
+    width: 200px;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+main section {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.register-btn-container, .login-btn-container {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.register-btn, .login-btn {
+    font-size: 16px;
+    width: 120px;
+    height: 36px;
+    border-radius: 18px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+    .register-btn:hover, .login-btn:hover {
+        background-color: green;
+        color: white;
+        cursor: pointer;
+    }
+
+.main-first-page {
+    display: flex;
+}
+
+.first-col, .second-col {
+    width: 50vw;
+    height: 100vh;
+}
+
+    .first-col img, .second-col img {
+        width: 100%;
+        height: 100%;
+    }
+
+
+    .first-col .ingredients {
+        background-color: rgba(0, 0, 0,0.5);
+        border-radius: 6px;
+        position: absolute;
+        top: 160px;
+        left: 25px;
+        color: white;
+        padding: 0 20px;
+    }
+
+    .second-col p {
+        background-color: white;
+    }

@@ -9,8 +9,8 @@ import jakarta.persistence.Table;
 @Table(name = "pictures")
 public class Picture extends BaseEntity {
 
-    @Column(name = "order_number")
-    private Integer orderNumber;
+//    @Column(name = "order_number")
+//    private Integer orderNumber;
 
     @Column(columnDefinition = "TEXT")
     private String url;
@@ -21,14 +21,14 @@ public class Picture extends BaseEntity {
     public Picture() {
     }
 
-    public int getOrder() {
-        return orderNumber;
-    }
-
-    public Picture setOrder(int orderNumber) {
-        this.orderNumber = orderNumber;
-        return this;
-    }
+//    public int getOrder() {
+//        return orderNumber;
+//    }
+//
+//    public Picture setOrder(int orderNumber) {
+//        this.orderNumber = orderNumber;
+//        return this;
+//    }
 
     public String getUrl() {
         return url;
