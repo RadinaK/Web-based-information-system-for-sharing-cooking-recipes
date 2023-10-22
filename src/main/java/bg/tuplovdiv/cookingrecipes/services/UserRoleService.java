@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,11 +26,11 @@ public class UserRoleService {
         this.modelMapper = modelMapper;
     }
 
-    public List<UserRoleModel> findAllRoles() {
+    public Set<UserRoleModel> findAllRoles() {
         return this.roleRepository.findAll()
                 .stream()
                 .map(r -> this.modelMapper.map(r, UserRoleModel.class))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public UserRoleModel findRoleByName(String name) {

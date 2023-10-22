@@ -1,6 +1,5 @@
 package bg.tuplovdiv.cookingrecipes.services;
 
-import bg.tuplovdiv.cookingrecipes.domain.beans.LoggedUser;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RoleChangeForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.UserLoginForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.UserRegisterForm;
@@ -8,6 +7,7 @@ import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.UserModel;
 import bg.tuplovdiv.cookingrecipes.domain.entities.User;
 import bg.tuplovdiv.cookingrecipes.domain.entities.UserRole;
 import bg.tuplovdiv.cookingrecipes.domain.enums.Role;
+import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
 import bg.tuplovdiv.cookingrecipes.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class UserService {
 
         userModel.setRole(this.userRepository.count() == 0
                 ? this.userRoleService.findAllRoles()
-                : List.of(this.userRoleService.findRoleByName("USER")));
+                : Set.of((this.userRoleService.findRoleByName("USER"))));
 
         final User userToSave = this.modelMapper.map(userModel, User.class);
 
