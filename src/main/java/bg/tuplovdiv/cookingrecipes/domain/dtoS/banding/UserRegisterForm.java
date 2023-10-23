@@ -1,11 +1,11 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.banding;
 
-import bg.tuplovdiv.cookingrecipes.validations.matchingPasswords.PasswordMatch;
+import bg.tuplovdiv.cookingrecipes.validations.passwardMatcher.PasswordMatch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-@PasswordMatch(password = "password", confirmPassword = "confirmPassword")
+@PasswordMatch
 public class UserRegisterForm {
 
     @NotNull

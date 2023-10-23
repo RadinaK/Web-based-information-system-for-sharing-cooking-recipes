@@ -1,8 +1,8 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.banding;
 
-import bg.tuplovdiv.cookingrecipes.validations.userExists.ValidateLoginUser;
+import bg.tuplovdiv.cookingrecipes.validations.checkUserExistance.ValidateLoginForm;
 
-@ValidateLoginUser
+@ValidateLoginForm
 public class UserLoginForm {
     private String username;
     private String password;

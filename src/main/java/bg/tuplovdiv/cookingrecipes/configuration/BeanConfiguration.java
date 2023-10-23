@@ -1,6 +1,6 @@
 package bg.tuplovdiv.cookingrecipes.configuration;
 
-import bg.tuplovdiv.cookingrecipes.domain.beans.LoggedUser;
+import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

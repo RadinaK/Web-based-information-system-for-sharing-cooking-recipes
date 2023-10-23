@@ -4,6 +4,7 @@ import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RoleChangeForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.UserLoginForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.UserRegisterForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.UserModel;
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.veiw.UserProfileModel;
 import bg.tuplovdiv.cookingrecipes.domain.entities.User;
 import bg.tuplovdiv.cookingrecipes.domain.entities.UserRole;
 import bg.tuplovdiv.cookingrecipes.domain.enums.Role;
@@ -37,15 +38,6 @@ public class UserService {
         this.loggedUser = loggedUser;
     }
 
-    public void dbInit() {
-
-    }
-
-
-    public boolean isDbInit() {
-        return this.userRepository.count() > 0;
-    }
-
 
     //UserModel?
     public void registerUser(UserRegisterForm userRegister) {
@@ -57,7 +49,7 @@ public class UserService {
 
         final User userToSave = this.modelMapper.map(userModel, User.class);
 
-         this.modelMapper.map(this.userRepository.saveAndFlush(userToSave), UserModel.class);
+        this.modelMapper.map(this.userRepository.saveAndFlush(userToSave), UserModel.class);
     }
 
 
@@ -115,5 +107,17 @@ public class UserService {
         this.userRepository.saveAndFlush(user);
 
         return user.getRoles().stream().map(UserRole::getRole).collect(Collectors.toSet());
+    }
+
+    public UserModel findByUsername(String username) {
+        return this.modelMapper
+                .map(this.userRepository
+                                .findByUsername(username)
+                                .orElse(new User())
+                        , UserModel.class);
+    }
+
+    public UserProfileModel getLoggedUserProfile() {
+        return this.modelMapper.map(this.userRepository.findById(loggedUser.getId()), UserProfileModel.class);
     }
 }

@@ -1,6 +1,6 @@
 package bg.tuplovdiv.cookingrecipes.services;
 
-import bg.tuplovdiv.cookingrecipes.domain.beans.LoggedUser;
+import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
 import bg.tuplovdiv.cookingrecipes.repositories.RecipeIngredientRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

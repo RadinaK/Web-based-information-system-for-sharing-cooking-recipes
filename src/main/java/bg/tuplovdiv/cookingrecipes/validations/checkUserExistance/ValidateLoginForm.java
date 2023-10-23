@@ -1,4 +1,4 @@
-package bg.tuplovdiv.cookingrecipes.validations.userExists;
+package bg.tuplovdiv.cookingrecipes.validations.checkUserExistance;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -10,12 +10,13 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Constraint(validatedBy = LoginUserValidator.class)
-public @interface ValidateLoginUser {
+@Constraint(validatedBy = UserLoginValidator.class)
+public @interface ValidateLoginForm {
 
-    String message() default "Username Or Password doesn't match";
+    String message() default "Invalid user";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
+

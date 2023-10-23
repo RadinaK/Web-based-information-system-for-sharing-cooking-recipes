@@ -1,4 +1,4 @@
-package bg.tuplovdiv.cookingrecipes.validations.matchingPasswords;
+package bg.tuplovdiv.cookingrecipes.validations.passwardMatcher;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -10,14 +10,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Constraint(validatedBy = PasswordMather.class)
+@Constraint(validatedBy = PasswordMatcher.class)
 public @interface PasswordMatch {
 
-    String password();
-
-    String confirmPassword();
-
-    String message() default "Passwords miss match";
+    String message() default "Password miss match";
 
     Class<?>[] groups() default {};
 
