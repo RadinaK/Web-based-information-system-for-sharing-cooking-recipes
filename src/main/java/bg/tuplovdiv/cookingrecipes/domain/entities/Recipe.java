@@ -4,6 +4,7 @@ import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "recipes")
@@ -26,6 +27,12 @@ public class Recipe extends BaseEntity {
 
     @ManyToOne
     private User cook;
+
+    @OneToMany(targetEntity = Picture.class,
+            mappedBy = "route",
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE})
+    private Set<Picture> pictures;
 
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinTable(name = "recipe_ingredients",
@@ -98,4 +105,22 @@ public class Recipe extends BaseEntity {
         return this;
     }
 
+    public Recipe setCookingTime(Integer cookingTime) {
+        this.cookingTime = cookingTime;
+        return this;
+    }
+
+    public Recipe setServings(Integer servings) {
+        this.servings = servings;
+        return this;
+    }
+
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public Recipe setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
+        return this;
+    }
 }

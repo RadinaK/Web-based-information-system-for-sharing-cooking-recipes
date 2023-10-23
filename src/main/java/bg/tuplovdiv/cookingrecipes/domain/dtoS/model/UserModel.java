@@ -8,7 +8,7 @@ public class UserModel {
     private String password; //– password of the user.
     private String email;
     private String fullName;
-    private Set<UserRoleModel> role; //–  user's role (User or Admin).
+    private Set<UserRoleModel> roles; //–  user's role (User or Admin).
     private Integer age;
 
     public UserModel() {
@@ -59,12 +59,12 @@ public class UserModel {
         return this;
     }
 
-    public Set<UserRoleModel> getRole() {
-        return role;
+    public Set<UserRoleModel> getRoles() {
+        return roles;
     }
 
-    public UserModel setRole(Set<UserRoleModel> role) {
-        this.role = role;
+    public UserModel setRoles(Set<UserRoleModel> roles) {
+        this.roles = roles;
         return this;
     }
 

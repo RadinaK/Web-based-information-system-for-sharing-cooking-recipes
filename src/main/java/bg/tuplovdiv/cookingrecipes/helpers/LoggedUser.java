@@ -48,6 +48,10 @@ public class LoggedUser {
     }
 
     public Boolean isAdmin() {
+        if (roleModels == null) {
+            return false;
+        }
+
         return roleModels.stream().anyMatch(roleModel -> roleModel.getRole().equals(Role.ADMIN));
     }
 }

@@ -1,8 +1,10 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.model;
 
+import bg.tuplovdiv.cookingrecipes.domain.enums.Role;
+
 public class UserRoleModel {
     private Long id;
-    private String role;
+    private Role role;
 
     public UserRoleModel() {
     }
@@ -16,11 +18,11 @@ public class UserRoleModel {
         return this;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public UserRoleModel setRole(String role) {
+    public UserRoleModel setRole(Role role) {
         this.role = role;
         return this;
     }

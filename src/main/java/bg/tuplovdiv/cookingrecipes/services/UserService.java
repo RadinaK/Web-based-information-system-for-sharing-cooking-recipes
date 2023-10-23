@@ -14,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
@@ -43,7 +42,7 @@ public class UserService {
     public void registerUser(UserRegisterForm userRegister) {
         final UserModel userModel = this.modelMapper.map(userRegister, UserModel.class);
 
-        userModel.setRole(this.userRepository.count() == 0
+        userModel.setRoles(this.userRepository.count() == 0
                 ? this.userRoleService.findAllRoles()
                 : Set.of((this.userRoleService.findRoleByName("USER"))));
 
@@ -76,7 +75,7 @@ public class UserService {
             this.loggedUser
                     .setId(userConfirmation.getId())
                     .setUsername(userConfirmation.getUsername())
-                    .setRoleModels(userConfirmation.getRole());
+                    .setRoleModels(userConfirmation.getRoles());
         }
 
         return userConfirmation;
