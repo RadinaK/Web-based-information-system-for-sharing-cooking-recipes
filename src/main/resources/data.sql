@@ -1,9 +1,9 @@
 --use cooking_recipes10;
 -- user roles
---INSERT INTO roles (id, role)
---VALUES (1, 'USER');
---INSERT INTO roles (id, role)
---VALUES (2, 'ADMIN');
+INSERT INTO roles (id, role)
+VALUES (1, 'USER');
+INSERT INTO roles (id, role)
+VALUES (2, 'ADMIN');
 
 -- some test users
 INSERT INTO users (id, age, full_name, password, username)

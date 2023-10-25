@@ -1,0 +1,30 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/fragments/head}">
+</head>
+<body>
+<div class="wrapper">
+    <!-- Navigation -->
+    <header th:replace="~{/fragments/navigation}">
+    </header>
+
+    <section class="road" th:each="recipe : ${recipes}" th:object="${recipe}">
+        <img th:src="*{imageUrl}" alt="Title image">
+        <div>
+            <h2 th:text="*{name}">Your Recipe</h2>
+            <p th:text="*{description}"></p>
+            <a th:href="@{/recipes/{id}(id=*{id})}" class="btn">Learn More</a>
+        </div>
+    </section>
+</div>
+<!-- Wrapper Ends -->
+</body>
+<!--<footer class="footer bg-blur rounded">-->
+<!--    <div class="container-fluid text-center">-->
+<!--        <div class="h5 text-white">-->
+<!--            &copy; Healthylicious. All rights reserved.-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</footer>-->
+</html>

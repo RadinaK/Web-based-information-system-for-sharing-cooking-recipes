@@ -12,19 +12,20 @@ public class RecipeIngredientService {
     private final RecipeIngredientRepository recipeIngredientRepository;
     private final ModelMapper modelMapper;
     private final UserService userService;
-
     private final MeasureUnitService measureUnitService;
     private final IngredientService ingredientService;
+    private final RecipeService recipeService;
     private final LoggedUser loggedUser;
 
     @Autowired
 
-    public RecipeIngredientService(RecipeIngredientRepository recipeIngredientRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, MeasureUnitService measureUnitService, IngredientService ingredientService) {
+    public RecipeIngredientService(RecipeIngredientRepository recipeIngredientRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, MeasureUnitService measureUnitService, IngredientService ingredientService, RecipeService recipeService) {
         this.recipeIngredientRepository = recipeIngredientRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.measureUnitService = measureUnitService;
         this.ingredientService = ingredientService;
         this.loggedUser = loggedUser;
+        this.recipeService = recipeService;
     }
 }

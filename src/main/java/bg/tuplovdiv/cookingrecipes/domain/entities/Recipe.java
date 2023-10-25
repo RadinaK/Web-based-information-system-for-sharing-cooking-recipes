@@ -4,6 +4,7 @@ import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,11 +30,28 @@ public class Recipe extends BaseEntity {
     private User cook;
 
     @OneToMany(targetEntity = Picture.class,
-            mappedBy = "route",
+            mappedBy = "recipe",
             fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private Set<Picture> pictures;
 
+    @OneToMany(targetEntity = RecipeIngredient.class,
+            mappedBy = "recipe",
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE})
+    private Set<RecipeIngredient> recipeIngredients;
+
+    public Recipe() {
+    }
+
+    public Set<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    public Recipe setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
+        return this;
+    }
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinTable(name = "recipe_ingredients",
 //            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
@@ -46,9 +64,6 @@ public class Recipe extends BaseEntity {
 //            inverseJoinColumns = @JoinColumn(name = "measureunit_id", referencedColumnName = "id"))
 //    private Set<MeasureUnit> measureUnits;
 
-
-    public Recipe() {
-    }
 
     public String getTitle() {
         return title;
