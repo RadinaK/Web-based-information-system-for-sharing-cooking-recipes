@@ -15,4 +15,31 @@ public class RecipeIngredientAddForm {
 
     public RecipeIngredientAddForm() {
     }
+
+    public String getIngredient() {
+        return ingredient;
+    }
+
+    public RecipeIngredientAddForm setIngredient(String ingredient) {
+        this.ingredient = ingredient;
+        return this;
+    }
+
+    public String getMeasureUnit() {
+        return measureUnit;
+    }
+
+    public RecipeIngredientAddForm setMeasureUnit(String measureUnit) {
+        this.measureUnit = measureUnit;
+        return this;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public RecipeIngredientAddForm setAmount(Double amount) {
+        this.amount = amount;
+        return this;
+    }
 }

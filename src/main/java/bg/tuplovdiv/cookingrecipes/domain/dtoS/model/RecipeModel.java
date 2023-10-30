@@ -1,8 +1,10 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.model;
 
+import bg.tuplovdiv.cookingrecipes.domain.entities.Picture;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class RecipeModel {
     private Long id;
@@ -18,6 +20,8 @@ public class RecipeModel {
     private NameCategory nameCategory;
 
     private UserModel cook;
+
+    private Set<PictureModel> pictures;
 
     public RecipeModel() {
     }
@@ -82,6 +86,15 @@ public class RecipeModel {
 
     public RecipeModel setCook(UserModel cook) {
         this.cook = cook;
+        return this;
+    }
+
+    public Set<PictureModel> getPictures() {
+        return pictures;
+    }
+
+    public RecipeModel setPictures(Set<PictureModel> pictures) {
+        this.pictures = pictures;
         return this;
     }
 }

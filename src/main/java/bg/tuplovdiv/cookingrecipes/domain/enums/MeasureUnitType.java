@@ -1,18 +1,18 @@
 package bg.tuplovdiv.cookingrecipes.domain.enums;
 
 public enum MeasureUnitType {
-    Teaspoon,
-    Tablespoon,
-    Cup,
-    Pint,
-    Quart,
-//    Gallon,
-//    Ounce,
-//    Fluid,
-//    Pound,
+    TEASPOON,
+    TABLESPOON,
+    CUP,
+    PINT,
+    QUART,
+//    GALLON,
+//    OUNCE,
+//    FLUID,
+//    POUND,
 
-    Milliliter,
-    Liter,
-    Gram,
-    Kilogram
+    MILLILITER,
+    LITER,
+    GRAM,
+    KILOGRAM
 }
