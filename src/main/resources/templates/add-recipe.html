@@ -8,6 +8,8 @@
 <header th:replace="~{/fragments/navigation}">
 </header>
 
+
+
 <!-- Top Container -->
 <div class="row justify-content-center ">
     <form id="add-recipe-form"
@@ -126,6 +128,8 @@
         <label for="cookingTime">Cooking Time:</label>
         <input type="text" id="cookingTime" name="cookingTime" th:field="*{cookingTime}" />
 
+
+
         <div th:each="ingredient, i: *{ingredients}">
             <label th:text="'Ingredient ' + ${i.index + 1}"></label>
             <select th:field="*{ingredients[__${i.index}__].ingredientId}">
@@ -140,6 +144,35 @@
                 </div>
             </select>
         </div>
+
+
+
+        <!--TODO ------------------------------------------------------------------------------ js -->
+        <script th:src="@{/js/addscript.js}" type="text/javascript"></script>
+        <!--TODO ------------------------------------------------------------------------------ js -->
+<!--        <form th:object="${recipeAddForm}" id="recipeForm" action="/submitRecipe" method="post">-->
+            <!-- Your input fields for other recipe information -->
+            <table id="recipeIngredientsTable">
+                <!-- Iterate through recipe ingredients -->
+                <tr th:each="ingredient, rowStat : *{recipeIngredientList}">
+                    <td>
+                        <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].ingredient}" />
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].measureUnit}" />
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].amount}" />
+                    </td>
+                    <td>
+                        <a th:href="@{/removeIngredient/{index}(index=*{rowStat.index})}" th:if="${rowStat.index > 0}">Remove</a>
+                    </td>
+                </tr>
+            </table>
+            <button type="button" onclick="addIngredient()">Add Ingredient</button>
+<!--            <input type="submit" value="Submit Recipe">-->
+<!--        </form>-->
+
 
         <div class="d-flex justify-content-center mt-4">
             <button class="btn btn-primary btn-block w-50" type="submit">Add Recipe</button>

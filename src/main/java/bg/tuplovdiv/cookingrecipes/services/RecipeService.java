@@ -1,6 +1,7 @@
 package bg.tuplovdiv.cookingrecipes.services;
 
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeAddForm;
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeIngredientAddForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.RecipeModel;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.veiw.RecipePartialViewModel;
 import bg.tuplovdiv.cookingrecipes.domain.entities.Recipe;
@@ -89,6 +90,21 @@ public class RecipeService  {
         ;
 
         this.recipeRepository.saveAndFlush(recipe);
+    }
+
+
+    //TODO: refactoring
+    public RecipeAddForm addIngredient(RecipeAddForm recipeAddForm, RecipeIngredientAddForm newIngredient) {
+        recipeAddForm.getRecipeIngredientList().add(newIngredient);
+        return recipeAddForm;
+    }
+
+    //TODO: refactoring
+    public RecipeAddForm removeIngredient(RecipeAddForm recipeAddForm, int index) {
+        if (index >= 0 && index < recipeAddForm.getRecipeIngredientList().size()) {
+            recipeAddForm.getRecipeIngredientList().remove(index);
+        }
+        return recipeAddForm;
     }
 
 

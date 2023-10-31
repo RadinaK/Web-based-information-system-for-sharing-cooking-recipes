@@ -11,11 +11,9 @@ import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -79,4 +77,27 @@ public class RecipeController extends BaseController {
 //        return "recipes";
 //    }
 
+    //TODO: Handle form submission
+    @PostMapping("/submitRecipe")
+    public String submitRecipe(@ModelAttribute RecipeAddForm recipeAddForm) {
+        // Process the form data, save to the database, etc.
+        return "redirect:/recipeList"; // Redirect to the recipe list page or another appropriate page.
+    }
+
+    //TODO: Handle adding an ingredient. Model instead ModelAndView -> addAttribute instead addObject
+    @PostMapping("/addIngredient")
+    public String addIngredient(@ModelAttribute RecipeAddForm recipeAddForm, Model model) {
+        RecipeIngredientAddForm newIngredient = new RecipeIngredientAddForm();
+        recipeAddForm = recipeService.addIngredient(recipeAddForm, newIngredient);
+        model.addAttribute("recipeAddForm", recipeAddForm);
+        return "recipe-form :: ingredientsTable"; // Return a Thymeleaf fragment or use AJAX to update the UI.
+    }
+
+    //TODO: Handle removing an ingredient
+    @GetMapping("/removeIngredient/{index}")
+    public String removeIngredient(@ModelAttribute RecipeAddForm recipeAddForm, @PathVariable int index, Model model) {
+        recipeAddForm = recipeService.removeIngredient(recipeAddForm, index);
+        model.addAttribute("recipeAddForm", recipeAddForm);
+        return "recipe-form :: ingredientsTable"; // Return a Thymeleaf fragment or use AJAX to update the UI.
+    }
 }
