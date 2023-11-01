@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RecipeAddForm {
-    @Size(min = 4, max = 50)
+    @Size(min = 4, max = 20)
     private String title;
 
     @NotNull
@@ -20,12 +20,16 @@ public class RecipeAddForm {
     @Size(min = 200)
     private String description;
 
+    @NotNull
     private MultipartFile pictures;
 
+    @NotNull
     private NameCategory nameCategory;
 
+    @NotNull
     private Integer cookingTime;
 
+    @NotNull
     private Integer servings;
 
     public RecipeAddForm() {
