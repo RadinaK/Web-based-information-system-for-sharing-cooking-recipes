@@ -44,6 +44,8 @@ public class RecipeController extends BaseController {
 
     @GetMapping("/add")
     public ModelAndView getAdd(ModelAndView modelAndView) {
+        modelAndView.addObject("recipeAddForm", new RecipeAddForm());
+
         return super.view("add-recipe", modelAndView);
     }
 
@@ -55,6 +57,7 @@ public class RecipeController extends BaseController {
             return super.view("add-recipe",
                     modelAndView.addObject(recipeAddForm));
         }
+
 
         this.recipeService.addNewRecipe(recipeAddForm);
 
@@ -78,19 +81,20 @@ public class RecipeController extends BaseController {
 //    }
 
     //TODO: Handle form submission
-    @PostMapping("/submitRecipe")
+//    @PostMapping("/submitRecipe")
+    @PostMapping("/submitRecipeIngredients")
     public String submitRecipe(@ModelAttribute RecipeAddForm recipeAddForm) {
         // Process the form data, save to the database, etc.
         return "redirect:/recipeList"; // Redirect to the recipe list page or another appropriate page.
     }
 
     //TODO: Handle adding an ingredient. Model instead ModelAndView -> addAttribute instead addObject
-    @PostMapping("/addIngredient")
+    @PostMapping("/addRecipeIngredient")
     public String addIngredient(@ModelAttribute RecipeAddForm recipeAddForm, Model model) {
         RecipeIngredientAddForm newIngredient = new RecipeIngredientAddForm();
         recipeAddForm = recipeService.addIngredient(recipeAddForm, newIngredient);
         model.addAttribute("recipeAddForm", recipeAddForm);
-        return "recipe-form :: ingredientsTable"; // Return a Thymeleaf fragment or use AJAX to update the UI.
+        return "recipe-form :: recipes_ingredients"; // Return a Thymeleaf fragment or use AJAX to update the UI.
     }
 
     //TODO: Handle removing an ingredient
@@ -98,6 +102,6 @@ public class RecipeController extends BaseController {
     public String removeIngredient(@ModelAttribute RecipeAddForm recipeAddForm, @PathVariable int index, Model model) {
         recipeAddForm = recipeService.removeIngredient(recipeAddForm, index);
         model.addAttribute("recipeAddForm", recipeAddForm);
-        return "recipe-form :: ingredientsTable"; // Return a Thymeleaf fragment or use AJAX to update the UI.
+        return "recipe-form :: recipes_ingredients"; // Return a Thymeleaf fragment or use AJAX to update the UI.
     }
 }

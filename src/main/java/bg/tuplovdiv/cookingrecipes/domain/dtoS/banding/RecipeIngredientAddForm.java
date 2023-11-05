@@ -1,5 +1,7 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.banding;
 
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.IngredientModel;
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.MeasureUnitModel;
 import jakarta.validation.constraints.NotNull;
 
 public class RecipeIngredientAddForm {
@@ -8,12 +10,21 @@ public class RecipeIngredientAddForm {
     private String ingredient; //String?
 
     @NotNull
-    private String measureUnit;
+    private MeasureUnitModel measureUnit; //String?
 
     @NotNull
     private Double amount;
 
     public RecipeIngredientAddForm() {
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public RecipeIngredientAddForm setAmount(Double amount) {
+        this.amount = amount;
+        return this;
     }
 
     public String getIngredient() {
@@ -25,21 +36,12 @@ public class RecipeIngredientAddForm {
         return this;
     }
 
-    public String getMeasureUnit() {
+    public MeasureUnitModel getMeasureUnit() {
         return measureUnit;
     }
 
-    public RecipeIngredientAddForm setMeasureUnit(String measureUnit) {
+    public RecipeIngredientAddForm setMeasureUnit(MeasureUnitModel measureUnit) {
         this.measureUnit = measureUnit;
-        return this;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public RecipeIngredientAddForm setAmount(Double amount) {
-        this.amount = amount;
         return this;
     }
 }

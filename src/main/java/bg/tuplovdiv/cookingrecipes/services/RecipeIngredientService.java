@@ -1,13 +1,16 @@
 package bg.tuplovdiv.cookingrecipes.services;
 
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeAddForm;
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeIngredientAddForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.RecipeIngredientModel;
-import bg.tuplovdiv.cookingrecipes.domain.entities.Ingredient;
-import bg.tuplovdiv.cookingrecipes.domain.entities.RecipeIngredient;
+import bg.tuplovdiv.cookingrecipes.domain.entities.*;
 import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
 import bg.tuplovdiv.cookingrecipes.repositories.RecipeIngredientRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class RecipeIngredientService {
@@ -32,6 +35,44 @@ public class RecipeIngredientService {
 
     public RecipeIngredientModel findByIngredient(Ingredient ingredient) {
         return this.modelMapper.map(this.recipeIngredientRepository.findByIngredient(ingredient), RecipeIngredientModel.class);
+    }
+
+    public RecipeIngredientModel findByMeasureUnit(MeasureUnit measureUnit) {
+        return this.modelMapper.map(this.recipeIngredientRepository.findByMeasureUnit(measureUnit), RecipeIngredientModel.class);
+    }
+
+    public void addNewRecipeIngredient(RecipeIngredientAddForm recipeIngredientAddForm) throws IOException {
+        RecipeIngredient recipeIngredient = this.modelMapper.map(recipeIngredientAddForm, RecipeIngredient.class);
+
+//        recipeIngredient
+//                .setIngredient(recipeIngredientAddForm.getIngredient())
+//                .setMeasureUnit(recipeIngredientAddForm.getMeasureUnit())
+//                .setTitle(recipeAddForm.getTitle())
+//                .setCook(this.modelMapper
+//                        .map(this.userService
+//                                        .findByUsername(this.loggedUser.getUsername()),
+//                                User.class))
+//                .getRecipeIngredients()
+//                    .stream()
+//                    .map(recipeIngredient -> this.modelMapper
+//                        .map(recipeIngredient.getIngredient(),
+//                                recipeIngredient.getMeasureUnit(),
+//                                recipeIngredient.getAmount()), RecipeIngredient.class)
+//        ;
+
+        this.recipeIngredientRepository.saveAndFlush(recipeIngredient);
+    }
+
+    public RecipeAddForm addRecipeIngredient(RecipeAddForm recipeAddForm, RecipeIngredientAddForm newRecipeIngredient) {
+        recipeAddForm.getRecipeIngredientList().add(newRecipeIngredient);
+        return recipeAddForm;
+    }
+
+    public RecipeAddForm removeRecipeIngredient(RecipeAddForm recipeAddForm, int index) {
+        if (index >= 0 && index < recipeAddForm.getRecipeIngredientList().size()) {
+            recipeAddForm.getRecipeIngredientList().remove(index);
+        }
+        return recipeAddForm;
     }
 
 //    public RecipeIngredientModel findAll(RecipeIngredient recipeIngredient) {

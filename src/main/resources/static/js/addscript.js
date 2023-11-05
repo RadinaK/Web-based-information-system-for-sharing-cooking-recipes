@@ -1,16 +1,16 @@
 <script>
     function addIngredient() {
-        var form = document.getElementById("recipeForm");
+        var form = document.getElementById("recipeIngredientAddForm");
         var formData = new FormData(form);
         formData.append("recipeIngredientList", "");
 
-        fetch("/addIngredient", {
+        fetch("/addRecipeIngredient", {
             method: "POST",
             body: formData,
         })
             .then((response) => response.text())
             .then((data) => {
-                document.getElementById("recipeIngredientsTable").innerHTML = data;
+                document.getElementById("recipes_ingredients").innerHTML = data;
             });
     }
 

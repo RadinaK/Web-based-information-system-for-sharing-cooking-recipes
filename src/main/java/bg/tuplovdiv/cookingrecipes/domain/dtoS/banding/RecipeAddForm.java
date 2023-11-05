@@ -1,12 +1,15 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.banding;
 
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.IngredientModel;
 import bg.tuplovdiv.cookingrecipes.domain.entities.Picture;
+import bg.tuplovdiv.cookingrecipes.domain.enums.Allergy;
 import org.springframework.web.multipart.MultipartFile;
 import bg.tuplovdiv.cookingrecipes.domain.entities.RecipeIngredient;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +36,21 @@ public class RecipeAddForm {
     private Integer servings;
 
     public RecipeAddForm() {
+        this.recipeIngredientList = new ArrayList<>();
+
+//        this.recipeIngredientList.setIngredient
+        //TODO delete
+
+//        RecipeIngredientAddForm recipeIngredientAddForm = new RecipeIngredientAddForm();
+//        IngredientModel ingredientModel = new IngredientModel();
+//        ingredientModel.setId(20l);
+//        ingredientModel.setAllergy(Allergy.NONE);
+//        ingredientModel.
+//
+//        recipeIngredientAddForm.setIngredient()
+//        recipeIngredientList.add(recipeIngredientAddForm);
     }
+
 
     public String getTitle() {
         return title;
