@@ -2,15 +2,16 @@ package bg.tuplovdiv.cookingrecipes.domain.dtoS.banding;
 
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.IngredientModel;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.MeasureUnitModel;
+import bg.tuplovdiv.cookingrecipes.domain.enums.MeasureUnitType;
 import jakarta.validation.constraints.NotNull;
 
 public class RecipeIngredientAddForm {
 
     @NotNull
-    private String ingredient; //String?
+    private Long ingredientId; //String?
 
     @NotNull
-    private MeasureUnitModel measureUnit; //String?
+    private Long measureUnitId; //String?
 
     @NotNull
     private Double amount;
@@ -27,21 +28,21 @@ public class RecipeIngredientAddForm {
         return this;
     }
 
-    public String getIngredient() {
-        return ingredient;
+    public Long getIngredientId() {
+        return ingredientId;
     }
 
-    public RecipeIngredientAddForm setIngredient(String ingredient) {
-        this.ingredient = ingredient;
+    public RecipeIngredientAddForm setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
         return this;
     }
 
-    public MeasureUnitModel getMeasureUnit() {
-        return measureUnit;
+    public Long getMeasureUnitId() {
+        return measureUnitId;
     }
 
-    public RecipeIngredientAddForm setMeasureUnit(MeasureUnitModel measureUnit) {
-        this.measureUnit = measureUnit;
+    public RecipeIngredientAddForm setMeasureUnitId(Long measureUnitId) {
+        this.measureUnitId = measureUnitId;
         return this;
     }
 }

@@ -51,7 +51,6 @@ public class RecipeAddForm {
 //        recipeIngredientList.add(recipeIngredientAddForm);
     }
 
-
     public String getTitle() {
         return title;
     }

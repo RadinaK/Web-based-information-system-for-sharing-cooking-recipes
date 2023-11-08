@@ -2,11 +2,14 @@ package bg.tuplovdiv.cookingrecipes.services;
 
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeAddForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeIngredientAddForm;
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.IngredientModel;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.RecipeModel;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.veiw.RecipePartialViewModel;
+import bg.tuplovdiv.cookingrecipes.domain.entities.Ingredient;
 import bg.tuplovdiv.cookingrecipes.domain.entities.Recipe;
 import bg.tuplovdiv.cookingrecipes.domain.entities.RecipeIngredient;
 import bg.tuplovdiv.cookingrecipes.domain.entities.User;
+import bg.tuplovdiv.cookingrecipes.domain.enums.MeasureUnitType;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
 import bg.tuplovdiv.cookingrecipes.repositories.RecipeRepository;
@@ -14,10 +17,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -28,14 +30,16 @@ public class RecipeService  {
     private final UserService userService;
     private final LoggedUser loggedUser;
     private final RecipeIngredientService recipeIngredientService;
+    private final IngredientService ingredientService;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, RecipeIngredientService recipeIngredientService) {
+    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, RecipeIngredientService recipeIngredientService, IngredientService ingredientService) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.loggedUser = loggedUser;
         this.recipeIngredientService = recipeIngredientService;
+        this.ingredientService = ingredientService;
     }
 
 
@@ -91,6 +95,8 @@ public class RecipeService  {
 
         this.recipeRepository.saveAndFlush(recipe);
     }
+
+
 
 
     //TODO: refactoring
