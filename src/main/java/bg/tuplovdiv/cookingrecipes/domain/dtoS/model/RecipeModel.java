@@ -1,9 +1,9 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.model;
 
-import bg.tuplovdiv.cookingrecipes.domain.entities.Picture;
+import bg.tuplovdiv.cookingrecipes.domain.entities.RecipeIngredient;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public class RecipeModel {
@@ -23,8 +23,20 @@ public class RecipeModel {
 
     private Set<PictureModel> pictures;
 
+    private List<RecipeIngredient> recipeIngredientList;
+
     public RecipeModel() {
     }
+
+    public List<RecipeIngredient> getRecipeIngredientList() {
+        return recipeIngredientList;
+    }
+
+    public RecipeModel setRecipeIngredientList(List<RecipeIngredient> recipeIngredientList) {
+        this.recipeIngredientList = recipeIngredientList;
+        return this;
+    }
+
 
     public Long getId() {
         return id;

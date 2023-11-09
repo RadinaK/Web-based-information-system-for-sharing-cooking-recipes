@@ -13,7 +13,7 @@
 <div class="row justify-content-center ">
     <form id="add-recipe-form"
           class="w-50 rounded text-white mt-5"
-          th:action="@{/recipes/add}"
+          th:action="@{/recipes/add/save}"
           th:method="POST"
           th:object="${recipeAddForm}"
           enctype="multipart/form-data">
@@ -106,7 +106,7 @@
             <tr th:each="row,rowStat : *{recipeIngredientList}">
                 <td th:text="${rowStat.count}">1</td>
                 <td>
-                    <select th:field="*{recipeAddForm.recipeIngredientList[__${rowStat.index}__].ingredientId}">
+                    <select th:field="*{recipeIngredientList[__${rowStat.index}__].ingredientId}">
                         <option th:each="i : ${ingredientList}"
                                 th:value="${i.id}"
                                 th:text="${i.name}">Thymus Thymi
@@ -122,7 +122,7 @@
                     </select>
                 </td>
                 <td>
-                    <input type="number" th:field="*{recipeIngredientList[__${rowStat.index}__].amount" />
+                    <input type="number" th:field="*{recipeIngredientList[__${rowStat.index}__].amount}" />
                 </td>
                 <td>
                     <button type="submit" name="removeRow"
@@ -131,54 +131,54 @@
             </tr>
             </tbody>
         </table>
-                <!-- ------------------------------------------------------------------------------------------------>
-                <!--&lt;!&ndash;        <table id="recipes_ingredients">&ndash;&gt;-->
-                <!--            <tr th:each="i : *{recipeIngredientList}">-->
-                <!--                <th text="${i.ingredient.name}"> Ingredients ++-->
+        <!-- ------------------------------------------------------------------------------------------------>
+        <!--&lt;!&ndash;        <table id="recipes_ingredients">&ndash;&gt;-->
+        <!--            <tr th:each="i : *{recipeIngredientList}">-->
+        <!--                <th text="${i.ingredient.name}"> Ingredients ++-->
 
-                <!--                </th>-->
-                <!--            </tr>-->
-                <!--            &lt;!&ndash; Iterate through recipe ingredients &ndash;&gt;-->
-                <!--            <tr th:each="ingredient, rowStat : *{recipeIngredientList}">-->
-                <!--                <td>-->
-                <!--                    Ingredient:-->
-                <!--                    <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].ingredient.name}" />-->
-                <!--                </td>-->
-                <!--                <td>-->
-                <!--                    <select name="measureUnit" id="measureUnit" class="custom-select" th:field="*{recipeIngredientList[__${rowStat.index}__].measureUnit.measureUnitType}">-->
-                <!--                        <option value="" selected>Select measure unit</option>-->
-                <!--                        <option th:each="measureUnit : ${T(bg.tuplovdiv.cookingrecipes.domain.enums.MeasureUnitType.values()}"-->
-                <!--                                th:value="${measureUnit}"-->
-                <!--                                th:text="${measureUnit}">-->
-                <!--                        </option>-->
-                <!--                    </select>-->
-                <!--&lt;!&ndash;                    <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].measureUnit.measureUnitType}" />&ndash;&gt;-->
-                <!--                </td>-->
-                <!--                <td>-->
-                <!--                    <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].amount}" />-->
-                <!--                    <div class="col-auto">-->
-                <!--                        <label for="inputAmount" class="col-form-label ">Amount</label>-->
-                <!--                    </div>-->
-                <!--                    <div class="col-auto">-->
-                <!--                        <input name="amount" required-->
-                <!--                               th:value="*{amount}"-->
-                <!--                               type="number"-->
-                <!--                               id="inputAmount"-->
-                <!--                               class="form-control"-->
-                <!--                               min="0" max="1000">-->
-                <!--                    </div>-->
-                <!--                </td>-->
-                <!--                <td>-->
-                <!--                    <a th:href="@{/removeIngredient/{index}(index=*{rowStat.index})}" th:if="${rowStat.index > 0}">Remove</a>-->
-                <!--                </td>-->
-                <!--            </tr>-->
-                <!--&lt;!&ndash;        </table>&ndash;&gt;-->
-                <!--        <button type="button" onclick="addIngredient()">Add Ingredient</button>-->
-                <!-- ------------------------------------------------------------------------------------------------>
+        <!--                </th>-->
+        <!--            </tr>-->
+        <!--            &lt;!&ndash; Iterate through recipe ingredients &ndash;&gt;-->
+        <!--            <tr th:each="ingredient, rowStat : *{recipeIngredientList}">-->
+        <!--                <td>-->
+        <!--                    Ingredient:-->
+        <!--                    <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].ingredient.name}" />-->
+        <!--                </td>-->
+        <!--                <td>-->
+        <!--                    <select name="measureUnit" id="measureUnit" class="custom-select" th:field="*{recipeIngredientList[__${rowStat.index}__].measureUnit.measureUnitType}">-->
+        <!--                        <option value="" selected>Select measure unit</option>-->
+        <!--                        <option th:each="measureUnit : ${T(bg.tuplovdiv.cookingrecipes.domain.enums.MeasureUnitType.values()}"-->
+        <!--                                th:value="${measureUnit}"-->
+        <!--                                th:text="${measureUnit}">-->
+        <!--                        </option>-->
+        <!--                    </select>-->
+        <!--&lt;!&ndash;                    <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].measureUnit.measureUnitType}" />&ndash;&gt;-->
+        <!--                </td>-->
+        <!--                <td>-->
+        <!--                    <input type="text" th:field="*{recipeIngredientList[__${rowStat.index}__].amount}" />-->
+        <!--                    <div class="col-auto">-->
+        <!--                        <label for="inputAmount" class="col-form-label ">Amount</label>-->
+        <!--                    </div>-->
+        <!--                    <div class="col-auto">-->
+        <!--                        <input name="amount" required-->
+        <!--                               th:value="*{amount}"-->
+        <!--                               type="number"-->
+        <!--                               id="inputAmount"-->
+        <!--                               class="form-control"-->
+        <!--                               min="0" max="1000">-->
+        <!--                    </div>-->
+        <!--                </td>-->
+        <!--                <td>-->
+        <!--                    <a th:href="@{/removeIngredient/{index}(index=*{rowStat.index})}" th:if="${rowStat.index > 0}">Remove</a>-->
+        <!--                </td>-->
+        <!--            </tr>-->
+        <!--&lt;!&ndash;        </table>&ndash;&gt;-->
+        <!--        <button type="button" onclick="addIngredient()">Add Ingredient</button>-->
+        <!-- ------------------------------------------------------------------------------------------------>
 
-                <div class="d-flex justify-content-center mt-4">
-                    <button class="btn btn-primary btn-block w-50" type="submit">Add Recipe</button>
-                </div>
+        <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-primary btn-block w-50" type="submit">Add Recipe</button>
+        </div>
 
     </form>
 </div>

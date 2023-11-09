@@ -92,3 +92,17 @@ VALUES ('2', 'http://res.cloudinary.com/ch-cloud/image/upload/v1630581418/tqhjri
 
 INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
 VALUES ('1', '40', '1', '5', '1');
+INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
+VALUES ('2', '50', '2', '5', '1');
+INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
+VALUES ('3', '50', '3', '4', '1');
+INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
+VALUES ('4', '1', '4', '2', '1');
+INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
+VALUES ('5', '0.5', '5', '1', '1');
+INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
+VALUES ('6', '0.25', '6', '1', '1');
+INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
+VALUES ('7', '0.25', '7', '1', '1');
+INSERT INTO recipes_ingredients (id, amount, ingredient_id, measure_unit_id, recipe_id)
+VALUES ('8', '0.5', '8', '1', '1');

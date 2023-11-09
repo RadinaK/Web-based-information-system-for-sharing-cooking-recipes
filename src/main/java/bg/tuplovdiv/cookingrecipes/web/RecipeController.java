@@ -53,16 +53,13 @@ public class RecipeController extends BaseController {
     @GetMapping("/{id}")
     public ModelAndView getById(@PathVariable Long id,
                                 ModelAndView modelAndView) {
-        List<Ingredient> ingredientList = ingredientRepository.findAll();
-        List<MeasureUnit> measureUnitList = measureUnitRepository.findAll();
 
-        modelAndView.addObject("ingredientList", ingredientList);
-        modelAndView.addObject("measureUnitList", measureUnitList);
         return super.view("recipe-details",
                 modelAndView.addObject("recipe", this.recipeService.findById(id)));
     }
 
-    @RequestMapping(value="/add")
+
+    @GetMapping(value="/add")
     public ModelAndView getAdd(ModelAndView modelAndView) {
 
         List<Ingredient> ingredientList = ingredientRepository.findAll();
@@ -75,7 +72,7 @@ public class RecipeController extends BaseController {
         return super.view("add-recipe", modelAndView);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add/save")
     public ModelAndView postAdd(@Valid RecipeAddForm recipeAddForm,
                                 BindingResult bindingResult,
                                 ModelAndView modelAndView) throws IOException {
@@ -90,9 +87,9 @@ public class RecipeController extends BaseController {
         return super.view("redirect:/recipes");
     }
 
-    @RequestMapping(value="/add", params={"addRow"})
+    @RequestMapping(value="/add/save", params={"addRow"})
     public ModelAndView addRow(final RecipeAddForm recipeAddForm, final BindingResult bindingResult,
-                         ModelAndView modelAndView) {
+                               ModelAndView modelAndView) {
 
         List<Ingredient> ingredientList = ingredientRepository.findAll();
         List<MeasureUnit> measureUnitList = measureUnitRepository.findAll();
@@ -104,7 +101,7 @@ public class RecipeController extends BaseController {
         return super.view("add-recipe", modelAndView);
     }
 
-    @RequestMapping(value="/add", params={"removeRow"})
+    @RequestMapping(value="/add/save", params={"removeRow"})
     public ModelAndView removeRow(
             final RecipeAddForm recipeAddForm, final BindingResult bindingResult,
             final HttpServletRequest req, ModelAndView modelAndView) {
@@ -117,38 +114,12 @@ public class RecipeController extends BaseController {
         modelAndView.addObject("recipeAddForm", new RecipeAddForm());
         final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
         recipeAddForm.getRecipeIngredientList().remove(rowId.intValue());
+
+        modelAndView.addObject("measureUnitList", measureUnitList);
+
         return super.view("add-recipe", modelAndView);
     }
 
-//    @RequestMapping(value="/seedstartermng", params={"addRow"})
-//    public String addRow(final SeedStarter seedStarter, final BindingResult bindingResult) {
-//        seedStarter.getRows().add(new Row());
-//        return "seedstartermng";
-//    }
-//
-//    @RequestMapping(value="/seedstartermng", params={"removeRow"})
-//    public String removeRow(
-//            final SeedStarter seedStarter, final BindingResult bindingResult,
-//            final HttpServletRequest req) {
-//        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
-//        seedStarter.getRows().remove(rowId.intValue());
-
-
-
-//    @RequestMapping(value="/add", params={"addRow"})
-//    public String addRow(final RecipeIngredientAddForm recipeIngredientAddForm, final BindingResult bindingResult) {
-//        recipeIngredientAddForm.getRows().add(new Row());
-//        return "recipes";
-//    }
-//
-//    @RequestMapping(value="/recipes", params={"removeRow"})
-//    public String removeRow(
-//            final RecipeIngredientAddForm recipeIngredientAddForm, final BindingResult bindingResult,
-//            final HttpServletRequest req) {
-//        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
-//        recipeIngredientAddForm.getRows().remove(rowId.intValue());
-//        return "recipes";
-//    }
 
     //TODO: Handle form submission
 //    @PostMapping("/submitRecipe")
