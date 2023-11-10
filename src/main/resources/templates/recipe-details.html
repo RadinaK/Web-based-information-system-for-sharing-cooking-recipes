@@ -53,7 +53,9 @@
             <ul>
                 <li th:each="recipeIngredient : ${recipe.recipeIngredientList}">
                     <span th:text="${recipeIngredient.amount}"></span>
+                    <a>-</a>
                     <span th:text="${recipeIngredient.measureUnit.type}"></span>
+                    <a>-</a>
                     <span th:text="${recipeIngredient.ingredient.name}"></span>
                 </li>
             </ul>

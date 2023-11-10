@@ -35,34 +35,39 @@ public class Recipe extends BaseEntity {
             cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private Set<Picture> pictures;
 
+//    @OneToMany(targetEntity = RecipeIngredient.class,
+//            mappedBy = "recipe",
+//            fetch = FetchType.EAGER,
+//            cascade = {CascadeType.DETACH, CascadeType.MERGE})
+//    private Set<RecipeIngredient> recipeIngredients;
+
     @OneToMany(targetEntity = RecipeIngredient.class,
             mappedBy = "recipe",
             fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE})
-    private Set<RecipeIngredient> recipeIngredients;
+    private List<RecipeIngredient> recipeIngredientList;
 
     public Recipe() {
     }
 
-    public Set<RecipeIngredient> getRecipeIngredients() {
-        return recipeIngredients;
+    public List<RecipeIngredient> getRecipeIngredientList() {
+        return recipeIngredientList;
     }
 
-    public Recipe setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
-        this.recipeIngredients = recipeIngredients;
+    public Recipe setRecipeIngredientList(List<RecipeIngredient> recipeIngredientList) {
+        this.recipeIngredientList = recipeIngredientList;
         return this;
     }
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "recipe_ingredients",
-//            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
-//    private Set<Ingredient> ingredients;
+
+    //    public Set<RecipeIngredient> getRecipeIngredients() {
+//        return recipeIngredients;
+//    }
 //
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "recipe_measureunits",
-//            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "measureunit_id", referencedColumnName = "id"))
-//    private Set<MeasureUnit> measureUnits;
+//    public Recipe setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
+//        this.recipeIngredients = recipeIngredients;
+//        return this;
+//    }
+
 
 
     public String getTitle() {
