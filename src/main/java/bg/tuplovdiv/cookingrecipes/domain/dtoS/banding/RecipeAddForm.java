@@ -1,17 +1,12 @@
 package bg.tuplovdiv.cookingrecipes.domain.dtoS.banding;
 
-import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.IngredientModel;
-import bg.tuplovdiv.cookingrecipes.domain.entities.Picture;
-import bg.tuplovdiv.cookingrecipes.domain.enums.Allergy;
 import org.springframework.web.multipart.MultipartFile;
-import bg.tuplovdiv.cookingrecipes.domain.entities.RecipeIngredient;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class RecipeAddForm {
     @Size(min = 4, max = 20)
@@ -24,7 +19,9 @@ public class RecipeAddForm {
     private String description;
 
     @NotNull
-    private MultipartFile pictures;
+    private MultipartFile picture;
+
+    private String photoFileName;
 
     @NotNull
     private NameCategory nameCategory;
@@ -78,12 +75,21 @@ public class RecipeAddForm {
         return this;
     }
 
-    public MultipartFile getPictures() {
-        return pictures;
+    public String getPhotoFileName() {
+        return photoFileName;
     }
 
-    public RecipeAddForm setPictures(MultipartFile pictures) {
-        this.pictures = pictures;
+    public RecipeAddForm setPhotoFileName(String photoFileName) {
+        this.photoFileName = photoFileName;
+        return this;
+    }
+
+        public MultipartFile getPicture() {
+        return picture;
+    }
+
+    public RecipeAddForm setPicture(MultipartFile picture) {
+        this.picture = picture;
         return this;
     }
 

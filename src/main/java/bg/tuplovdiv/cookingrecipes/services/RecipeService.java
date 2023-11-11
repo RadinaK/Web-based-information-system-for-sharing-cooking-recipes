@@ -17,8 +17,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -69,30 +73,50 @@ public class RecipeService  {
     }
 
 
+//    public void addNewRecipe(RecipeAddForm recipeAddForm) throws IOException {
+//        Recipe recipe = this.modelMapper.map(recipeAddForm, Recipe.class);
+//
+//        recipe
+//                .setCook(this.modelMapper
+//                        .map(this.userService
+//                                        .findByUsername(this.loggedUser.getUsername()),
+//                                User.class))
+////                .getRecipeIngredients()
+////                    .stream()
+////                    .map(recipeIngredient -> this.modelMapper
+////                        .map(recipeIngredient.getIngredient(),
+////                                recipeIngredient.getMeasureUnit(),
+////                                recipeIngredient.getAmount()), RecipeIngredient.class)
+//
+////                .setCategories(recipeAddForm.getCategories()
+////                        .stream()
+////                        .map(cm -> this.modelMapper
+////                                .map(this.categoryService
+////                                                .findByName(CategoryName.valueOf(cm)),
+////                                        Category.class))
+////                        .collect(Collectors.toSet()))
+//        ;
+//
+//        this.recipeRepository.saveAndFlush(recipe);
+//    }
+
+
     public void addNewRecipe(RecipeAddForm recipeAddForm) throws IOException {
         Recipe recipe = this.modelMapper.map(recipeAddForm, Recipe.class);
+        MultipartFile picture = recipeAddForm.getPicture();
+
+        // Handle saving the photo to a local folder (replace "path/to/your/upload/directory/")
+        if (picture != null && !picture.isEmpty()) {
+            Path filePath = Paths.get("D:/TU/HealthyLicious/CookingRecipes/src/main/resources/static/images/" + picture.getOriginalFilename());
+            Files.write(filePath, picture.getBytes());
+            recipeAddForm.setPhotoFileName(filePath.toString());
+        }
 
         recipe
-//                .setTitle(recipeAddForm.getTitle())
                 .setCook(this.modelMapper
                         .map(this.userService
                                         .findByUsername(this.loggedUser.getUsername()),
-                                User.class))
-//                .getRecipeIngredients()
-//                    .stream()
-//                    .map(recipeIngredient -> this.modelMapper
-//                        .map(recipeIngredient.getIngredient(),
-//                                recipeIngredient.getMeasureUnit(),
-//                                recipeIngredient.getAmount()), RecipeIngredient.class)
-
-//                .setCategories(recipeAddForm.getCategories()
-//                        .stream()
-//                        .map(cm -> this.modelMapper
-//                                .map(this.categoryService
-//                                                .findByName(CategoryName.valueOf(cm)),
-//                                        Category.class))
-//                        .collect(Collectors.toSet()))
-        ;
+                                User.class));
 
         this.recipeRepository.saveAndFlush(recipe);
     }

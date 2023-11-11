@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.util.List;
@@ -72,16 +73,32 @@ public class RecipeController extends BaseController {
         return super.view("add-recipe", modelAndView);
     }
 
+//    @PostMapping("/add/save")
+//    public ModelAndView postAdd(@Valid RecipeAddForm recipeAddForm,
+//                                BindingResult bindingResult,
+//                                ModelAndView modelAndView) throws IOException {
+//        if (bindingResult.hasErrors()) {
+//            return super.view("add-recipe",
+//                    modelAndView.addObject(recipeAddForm));
+//        }
+//
+//        this.recipeService.addNewRecipe(recipeAddForm);
+//
+//        return super.view("redirect:/recipes");
+//    }
+
     @PostMapping("/add/save")
     public ModelAndView postAdd(@Valid RecipeAddForm recipeAddForm,
                                 BindingResult bindingResult,
-                                ModelAndView modelAndView) throws IOException {
+                                ModelAndView modelAndView,
+                                @RequestParam("photo") MultipartFile picture) throws IOException {
+
         if (bindingResult.hasErrors()) {
             return super.view("add-recipe",
                     modelAndView.addObject(recipeAddForm));
         }
 
-
+        recipeAddForm.setPicture(picture);
         this.recipeService.addNewRecipe(recipeAddForm);
 
         return super.view("redirect:/recipes");
@@ -121,6 +138,8 @@ public class RecipeController extends BaseController {
     }
 
 
+
+    //TODO: DELETE ---------------------------------------------------------------------------------
     //TODO: Handle form submission
 //    @PostMapping("/submitRecipe")
     @PostMapping("/submitRecipeIngredients")
