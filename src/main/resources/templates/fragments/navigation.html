@@ -1,39 +1,48 @@
 <header th:fragment="navigation">
-    <nav class="main-nav">
-        <ul th:if="${@loggedUser.id == null}">
-            <li>
-                <a th:href="@{/}">Home</a>
+
+    <!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">-->
+    <!--    <nav class="navbar navbar-dark" style="background-color: #006400; color: #ffffff;">-->
+    <!--    <nav class="navbar navbar-dark bg-darkGreen">-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <!--    <nav class="navbar navbar-light" style="background-color: #006400;">-->
+        <a class="navbar-brand" href="#">Healthylicious</a>
+        <ul class="navbar-nav" th:if="${@loggedUser.id == null}">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Начало</a>
             </li>
-            <li>
-                <a th:href="@{/auth/login}">Login</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/auth/login}">Влизане</a>
             </li>
-            <li>
-                <a th:href="@{/auth/register}">Register</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/auth/register}">Регистрация</a>
             </li>
-            <li>
-                <a href="/about">About</a>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">За нас</a>
             </li>
         </ul>
 
-        <ul th:unless="${@loggedUser.id == null}">
-            <li>
-                <a th:href="@{/recipes/add}">Add new recipe</a>
+        <ul class="navbar-nav" th:unless="${@loggedUser.id == null}">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Начало</a>
             </li>
 
-            <li>
-                <a th:href="@{/users/profile}">Profile</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/recipes/add}">Добави нова рецепта</a>
             </li>
 
-                <li th:if="${@loggedUser.isAdmin()}">
-                    <a href="/">Admin</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/users/profile}">Профил</a>
+            </li>
 
-                <li th:unless="${@loggedUser.isAdmin()}">
-                </li>
+            <li class="nav-item" th:if="${@loggedUser.isAdmin()}">
+                <a class="nav-link" href="/">Админ</a>
+            </li>
 
-            <li>
-                <a th:href="@{/auth/logout}">Logout</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/auth/logout}">Изход</a>
             </li>
         </ul>
+
     </nav>
 </header>

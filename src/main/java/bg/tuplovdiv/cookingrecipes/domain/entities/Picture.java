@@ -1,42 +1,37 @@
 package bg.tuplovdiv.cookingrecipes.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pictures")
 public class Picture extends BaseEntity {
 
-//    @Column(name = "order_number")
-//    private Integer orderNumber;
+    private String mimeType;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "picture_bytes",columnDefinition = "LONGBLOB")
+    private byte[] pictureBytes;
 
-    @Column(columnDefinition = "TEXT")
-    private String url;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Recipe recipe;
 
     public Picture() {
     }
 
-//    public int getOrder() {
-//        return orderNumber;
-//    }
-//
-//    public Picture setOrder(int orderNumber) {
-//        this.orderNumber = orderNumber;
-//        return this;
-//    }
-
-    public String getUrl() {
-        return url;
+    public String getMimeType() {
+        return mimeType;
     }
 
-    public Picture setUrl(String url) {
-        this.url = url;
-        return this;
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    public byte[] getPictureBytes() {
+        return pictureBytes;
+    }
+
+    public void setPictureBytes(byte[] pictureBytes) {
+        this.pictureBytes = pictureBytes;
     }
 
     public Recipe getRecipe() {

@@ -2,19 +2,15 @@ package bg.tuplovdiv.cookingrecipes.web;
 
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeAddForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeIngredientAddForm;
+import bg.tuplovdiv.cookingrecipes.domain.dtoS.veiw.RecipePartialViewModel;
 import bg.tuplovdiv.cookingrecipes.domain.entities.Ingredient;
 import bg.tuplovdiv.cookingrecipes.domain.entities.MeasureUnit;
-import bg.tuplovdiv.cookingrecipes.domain.entities.Recipe;
-import bg.tuplovdiv.cookingrecipes.domain.entities.RecipeIngredient;
-import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
 import bg.tuplovdiv.cookingrecipes.repositories.IngredientRepository;
 import bg.tuplovdiv.cookingrecipes.repositories.MeasureUnitRepository;
-import bg.tuplovdiv.cookingrecipes.repositories.RecipeIngredientRepository;
+import bg.tuplovdiv.cookingrecipes.services.RecipeIngredientService;
 import bg.tuplovdiv.cookingrecipes.services.RecipeService;
-import bg.tuplovdiv.cookingrecipes.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController extends BaseController {
     private final RecipeService recipeService;
+
 
     @Autowired
     public RecipeController(RecipeService recipeService) {
@@ -46,15 +42,19 @@ public class RecipeController extends BaseController {
     @GetMapping
     public ModelAndView getAllRecipes(ModelAndView modelAndView) {
 
-
+        List<RecipePartialViewModel> asdf = this.recipeService.getAllRecipesPartialViews();
         return super.view("recipes",
-                modelAndView.addObject("recipes", this.recipeService.getAllRecipesPartialViews()));
+                modelAndView.addObject("recipes", asdf));
     }
 
     @GetMapping("/{id}")
     public ModelAndView getById(@PathVariable Long id,
                                 ModelAndView modelAndView) {
+        List<Ingredient> ingredientList = ingredientRepository.findAll();
+        List<MeasureUnit> measureUnitList = measureUnitRepository.findAll();
 
+        modelAndView.addObject("ingredientList", ingredientList);
+        modelAndView.addObject("measureUnitList", measureUnitList);
         return super.view("recipe-details",
                 modelAndView.addObject("recipe", this.recipeService.findById(id)));
     }
@@ -73,19 +73,6 @@ public class RecipeController extends BaseController {
         return super.view("add-recipe", modelAndView);
     }
 
-//    @PostMapping("/add/save")
-//    public ModelAndView postAdd(@Valid RecipeAddForm recipeAddForm,
-//                                BindingResult bindingResult,
-//                                ModelAndView modelAndView) throws IOException {
-//        if (bindingResult.hasErrors()) {
-//            return super.view("add-recipe",
-//                    modelAndView.addObject(recipeAddForm));
-//        }
-//
-//        this.recipeService.addNewRecipe(recipeAddForm);
-//
-//        return super.view("redirect:/recipes");
-//    }
 
     @PostMapping("/add/save")
     public ModelAndView postAdd(@Valid RecipeAddForm recipeAddForm,
@@ -98,14 +85,16 @@ public class RecipeController extends BaseController {
                     modelAndView.addObject(recipeAddForm));
         }
 
-        recipeAddForm.setPicture(picture);
+        recipeAddForm.setPhoto(picture);
         this.recipeService.addNewRecipe(recipeAddForm);
-
+        //Exception handling???
         return super.view("redirect:/recipes");
     }
 
+
     @RequestMapping(value="/add/save", params={"addRow"})
-    public ModelAndView addRow(final RecipeAddForm recipeAddForm, final BindingResult bindingResult,
+    public ModelAndView addRow(final RecipeAddForm recipeAddForm,
+                               final BindingResult bindingResult,
                                ModelAndView modelAndView) {
 
         List<Ingredient> ingredientList = ingredientRepository.findAll();
@@ -120,8 +109,10 @@ public class RecipeController extends BaseController {
 
     @RequestMapping(value="/add/save", params={"removeRow"})
     public ModelAndView removeRow(
-            final RecipeAddForm recipeAddForm, final BindingResult bindingResult,
-            final HttpServletRequest req, ModelAndView modelAndView) {
+            final RecipeAddForm recipeAddForm,
+            final BindingResult bindingResult,
+            final HttpServletRequest req,
+            ModelAndView modelAndView) {
 
         List<Ingredient> ingredientList = ingredientRepository.findAll();
         List<MeasureUnit> measureUnitList = measureUnitRepository.findAll();
@@ -133,7 +124,6 @@ public class RecipeController extends BaseController {
         recipeAddForm.getRecipeIngredientList().remove(rowId.intValue());
 
         modelAndView.addObject("measureUnitList", measureUnitList);
-
         return super.view("add-recipe", modelAndView);
     }
 

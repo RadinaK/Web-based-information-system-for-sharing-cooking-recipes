@@ -2,7 +2,7 @@ package bg.tuplovdiv.cookingrecipes.domain.dtoS.model;
 
 public class PictureModel {
     private Long id;
-//    private String title;
+    //    private String title;
     private String url;
     private RecipeModel recipe;
 

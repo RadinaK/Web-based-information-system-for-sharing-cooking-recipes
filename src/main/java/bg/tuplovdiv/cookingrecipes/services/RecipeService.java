@@ -2,16 +2,13 @@ package bg.tuplovdiv.cookingrecipes.services;
 
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeAddForm;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.banding.RecipeIngredientAddForm;
-import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.IngredientModel;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.model.RecipeModel;
 import bg.tuplovdiv.cookingrecipes.domain.dtoS.veiw.RecipePartialViewModel;
-import bg.tuplovdiv.cookingrecipes.domain.entities.Ingredient;
-import bg.tuplovdiv.cookingrecipes.domain.entities.Recipe;
-import bg.tuplovdiv.cookingrecipes.domain.entities.RecipeIngredient;
-import bg.tuplovdiv.cookingrecipes.domain.entities.User;
-import bg.tuplovdiv.cookingrecipes.domain.enums.MeasureUnitType;
+import bg.tuplovdiv.cookingrecipes.domain.entities.*;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
+import bg.tuplovdiv.cookingrecipes.repositories.PictureRepository;
+import bg.tuplovdiv.cookingrecipes.repositories.RecipeIngredientRepository;
 import bg.tuplovdiv.cookingrecipes.repositories.RecipeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class RecipeService  {
@@ -36,14 +28,20 @@ public class RecipeService  {
     private final RecipeIngredientService recipeIngredientService;
     private final IngredientService ingredientService;
 
+    private final PictureRepository pictureRepository;
+
+    private final RecipeIngredientRepository recipeIngredientRepository;
+
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, RecipeIngredientService recipeIngredientService, IngredientService ingredientService) {
+    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, RecipeIngredientService recipeIngredientService, IngredientService ingredientService, PictureRepository pictureRepository, RecipeIngredientRepository recipeIngredientRepository) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.loggedUser = loggedUser;
         this.recipeIngredientService = recipeIngredientService;
         this.ingredientService = ingredientService;
+        this.pictureRepository = pictureRepository;
+        this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
 
@@ -72,44 +70,56 @@ public class RecipeService  {
                         RecipeModel.class);
     }
 
-
+    //Without saving recipeIngredient
 //    public void addNewRecipe(RecipeAddForm recipeAddForm) throws IOException {
 //        Recipe recipe = this.modelMapper.map(recipeAddForm, Recipe.class);
+//        MultipartFile picture = recipeAddForm.getPhoto();
+//        Picture pictureModel = new Picture();
+//        pictureModel.setRecipe(recipe);
+//        HashSet pictures = new HashSet<Picture>();
+//        // Handle saving the photo to a local folder (replace "path/to/your/upload/directory/")
+//        if (picture != null && !picture.isEmpty()) {
+//            pictureModel.setPictureBytes(picture.getBytes());
+//            pictureModel.setMimeType(picture.getContentType());
+//            pictures.add(pictureModel);
+//            recipe.setPictures(pictures);
+//        } else {
+//            pictureModel.setPictureBytes(this.getClass().getClassLoader()
+//                        .getResourceAsStream("static/images/recipe-placeholder.jpg").readAllBytes());
+//            pictureModel.setMimeType("image/jpeg");
+//            pictures.add(pictureModel);
+//            recipe.setPictures(pictures);
+//        }
 //
 //        recipe
 //                .setCook(this.modelMapper
 //                        .map(this.userService
 //                                        .findByUsername(this.loggedUser.getUsername()),
-//                                User.class))
-////                .getRecipeIngredients()
-////                    .stream()
-////                    .map(recipeIngredient -> this.modelMapper
-////                        .map(recipeIngredient.getIngredient(),
-////                                recipeIngredient.getMeasureUnit(),
-////                                recipeIngredient.getAmount()), RecipeIngredient.class)
-//
-////                .setCategories(recipeAddForm.getCategories()
-////                        .stream()
-////                        .map(cm -> this.modelMapper
-////                                .map(this.categoryService
-////                                                .findByName(CategoryName.valueOf(cm)),
-////                                        Category.class))
-////                        .collect(Collectors.toSet()))
-//        ;
+//                                User.class));
 //
 //        this.recipeRepository.saveAndFlush(recipe);
+//        this.pictureRepository.saveAndFlush(pictureModel);
 //    }
 
 
     public void addNewRecipe(RecipeAddForm recipeAddForm) throws IOException {
         Recipe recipe = this.modelMapper.map(recipeAddForm, Recipe.class);
-        MultipartFile picture = recipeAddForm.getPicture();
-
+        MultipartFile picture = recipeAddForm.getPhoto();
+        Picture pictureModel = new Picture();
+        pictureModel.setRecipe(recipe);
+        HashSet pictures = new HashSet<Picture>();
         // Handle saving the photo to a local folder (replace "path/to/your/upload/directory/")
         if (picture != null && !picture.isEmpty()) {
-            Path filePath = Paths.get("D:/TU/HealthyLicious/CookingRecipes/src/main/resources/static/images/" + picture.getOriginalFilename());
-            Files.write(filePath, picture.getBytes());
-            recipeAddForm.setPhotoFileName(filePath.toString());
+            pictureModel.setPictureBytes(picture.getBytes());
+            pictureModel.setMimeType(picture.getContentType());
+            pictures.add(pictureModel);
+            recipe.setPictures(pictures);
+        } else {
+            pictureModel.setPictureBytes(this.getClass().getClassLoader()
+                    .getResourceAsStream("static/images/recipe-placeholder.jpg").readAllBytes());
+            pictureModel.setMimeType("image/jpeg");
+            pictures.add(pictureModel);
+            recipe.setPictures(pictures);
         }
 
         recipe
@@ -119,9 +129,8 @@ public class RecipeService  {
                                 User.class));
 
         this.recipeRepository.saveAndFlush(recipe);
+        this.pictureRepository.saveAndFlush(pictureModel);
     }
-
-
 
 
     //TODO: refactoring

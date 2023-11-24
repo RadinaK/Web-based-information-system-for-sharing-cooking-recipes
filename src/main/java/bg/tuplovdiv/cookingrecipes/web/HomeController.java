@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController extends BaseController {
 
     private static final String USERNAME_SESSION_KEY = "username";
+
     private final RecipeService recipeService;
 
     @Autowired
@@ -32,5 +33,10 @@ public class HomeController extends BaseController {
         modelAndView.addObject(USERNAME_SESSION_KEY, username);
 
         return super.view("index", modelAndView);
+    }
+
+    @GetMapping("about")
+    public ModelAndView getAbout() {
+        return super.view("about");
     }
 }

@@ -13,20 +13,20 @@
                 <div class="profile-card p-3 py-4" th:object="${profile}">
                     <div class="text-center"><img src="/images/profile.jpg" width="100" class="rounded-circle"></div>
                     <div class="text-center mt-3">
-<!--                        <span class="bg-secondary p-1 px-4 rounded text-white"-->
-<!--                        th:text="*{level}">Pro</span>-->
+                        <!--                        <span class="bg-secondary p-1 px-4 rounded text-white"-->
+                        <!--                        th:text="*{level}">Pro</span>-->
 
-                        <h5 class="mt-4 mb-0">Full name</h5>
-                        <span th:text="*{fullName}">UI/UX Designer</span>
+                        <h5 class="mt-4 mb-0">Пълно име</h5>
+                        <span th:text="*{fullName}"></span>
 
-                        <h5 class="mt-2 mb-0">Username</h5>
-                        <span th:text="*{username}">UI/UX Designer</span>
+                        <h5 class="mt-2 mb-0">Потребителско име</h5>
+                        <span th:text="*{username}"></span>
 
-                        <h5 class="mt-2 mb-0">Age</h5>
+                        <h5 class="mt-2 mb-0">Възраст</h5>
                         <span th:text="*{age}"></span>
 
                         <div class="px-4 mt-5">
-                            <p class="fonts">Profile</p>
+                            <p class="fonts">Профил</p>
                         </div>
 
                         <ul class="social-list">
@@ -36,7 +36,7 @@
                             <li><i class="fab fa-google"></i></li>
                         </ul>
                         <div class="buttons">
-                            <a class="btn btn-outline-primary px-4" th:href="@{/}">Back</a>
+                            <a class="btn btn-outline-primary px-4" th:href="@{/}">Назад</a>
                         </div>
                     </div>
                 </div>

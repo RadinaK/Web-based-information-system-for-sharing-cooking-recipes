@@ -9,19 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAddForm {
-    @Size(min = 4, max = 20)
+    @Size(min = 4, max = 50)
     private String title;
 
     @NotNull
     private List<RecipeIngredientAddForm> recipeIngredientList;
 
-    @Size(min = 200)
+    @Size(min = 5)
     private String description;
 
     @NotNull
-    private MultipartFile picture;
-
-    private String photoFileName;
+    private MultipartFile photo;
 
     @NotNull
     private NameCategory nameCategory;
@@ -75,22 +73,12 @@ public class RecipeAddForm {
         return this;
     }
 
-    public String getPhotoFileName() {
-        return photoFileName;
+    public MultipartFile getPhoto() {
+        return photo;
     }
 
-    public RecipeAddForm setPhotoFileName(String photoFileName) {
-        this.photoFileName = photoFileName;
-        return this;
-    }
-
-        public MultipartFile getPicture() {
-        return picture;
-    }
-
-    public RecipeAddForm setPicture(MultipartFile picture) {
-        this.picture = picture;
-        return this;
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
     }
 
     public NameCategory getNameCategory() {
