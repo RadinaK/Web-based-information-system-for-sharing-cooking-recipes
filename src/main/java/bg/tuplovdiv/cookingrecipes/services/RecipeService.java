@@ -7,9 +7,7 @@ import bg.tuplovdiv.cookingrecipes.domain.dtoS.veiw.RecipePartialViewModel;
 import bg.tuplovdiv.cookingrecipes.domain.entities.*;
 import bg.tuplovdiv.cookingrecipes.domain.enums.NameCategory;
 import bg.tuplovdiv.cookingrecipes.helpers.LoggedUser;
-import bg.tuplovdiv.cookingrecipes.repositories.PictureRepository;
-import bg.tuplovdiv.cookingrecipes.repositories.RecipeIngredientRepository;
-import bg.tuplovdiv.cookingrecipes.repositories.RecipeRepository;
+import bg.tuplovdiv.cookingrecipes.repositories.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
-public class RecipeService  {
+public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final ModelMapper modelMapper;
     private final UserService userService;
@@ -31,9 +29,11 @@ public class RecipeService  {
     private final PictureRepository pictureRepository;
 
     private final RecipeIngredientRepository recipeIngredientRepository;
+    private final IngredientRepository ingredientRepository;
+    private final MeasureUnitRepository measureUnitRepository;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, RecipeIngredientService recipeIngredientService, IngredientService ingredientService, PictureRepository pictureRepository, RecipeIngredientRepository recipeIngredientRepository) {
+    public RecipeService(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, LoggedUser loggedUser, RecipeIngredientService recipeIngredientService, IngredientService ingredientService, PictureRepository pictureRepository, RecipeIngredientRepository recipeIngredientRepository, IngredientRepository ingredientRepository, MeasureUnitRepository measureUnitRepository) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
@@ -42,6 +42,8 @@ public class RecipeService  {
         this.ingredientService = ingredientService;
         this.pictureRepository = pictureRepository;
         this.recipeIngredientRepository = recipeIngredientRepository;
+        this.ingredientRepository = ingredientRepository;
+        this.measureUnitRepository = measureUnitRepository;
     }
 
 
@@ -102,8 +104,13 @@ public class RecipeService  {
 //    }
 
 
+    @Transactional
     public void addNewRecipe(RecipeAddForm recipeAddForm) throws IOException {
+        //Create and save recipe entity
         Recipe recipe = this.modelMapper.map(recipeAddForm, Recipe.class);
+        recipe.setCook(this.modelMapper.map(this.userService.findByUsername(this.loggedUser.getUsername()), User.class));
+        this.recipeRepository.saveAndFlush(recipe);
+        //Create and save picture entity
         MultipartFile picture = recipeAddForm.getPhoto();
         Picture pictureModel = new Picture();
         pictureModel.setRecipe(recipe);
@@ -121,15 +128,24 @@ public class RecipeService  {
             pictures.add(pictureModel);
             recipe.setPictures(pictures);
         }
-
-        recipe
-                .setCook(this.modelMapper
-                        .map(this.userService
-                                        .findByUsername(this.loggedUser.getUsername()),
-                                User.class));
-
-        this.recipeRepository.saveAndFlush(recipe);
         this.pictureRepository.saveAndFlush(pictureModel);
+        //Create and save ingredients entities
+        recipeAddForm.getRecipeIngredientList().stream().forEach(recipeIngredientAddForm -> {
+            Ingredient ingredient = this.ingredientRepository.findById(
+                            recipeIngredientAddForm.getIngredientId()).
+                    orElseThrow(() -> new RuntimeException(String.format("Ingridient with ingredientId %d dosn't exist",
+                            recipeIngredientAddForm.getIngredientId())));
+            MeasureUnit measureUnit = this.measureUnitRepository.findById(
+                            recipeIngredientAddForm.getMeasureUnitId()).
+                    orElseThrow(() -> new RuntimeException(String.format("Measurement unit with measureUnitId %d dosn't exist",
+                            recipeIngredientAddForm.getMeasureUnitId())));
+            RecipeIngredient recipeIngredient = new RecipeIngredient(recipe, ingredient, measureUnit, recipeIngredientAddForm.getAmount());
+            recipe.getRecipeIngredientList().add(recipeIngredient);
+            this.recipeIngredientRepository.saveAndFlush(recipeIngredient);
+        });
+
+
+//        this.recipeRepository.saveAndFlush(recipe);
     }
 
 

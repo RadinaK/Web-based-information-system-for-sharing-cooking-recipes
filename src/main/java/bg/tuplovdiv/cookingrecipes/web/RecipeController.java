@@ -127,8 +127,6 @@ public class RecipeController extends BaseController {
         return super.view("add-recipe", modelAndView);
     }
 
-
-
     //TODO: DELETE ---------------------------------------------------------------------------------
     //TODO: Handle form submission
 //    @PostMapping("/submitRecipe")

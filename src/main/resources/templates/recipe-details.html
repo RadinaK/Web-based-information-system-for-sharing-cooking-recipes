@@ -12,39 +12,7 @@
         <section class="recipe-info text-center">
             <h4 id="track-name" th:text="*{title}"></h4>
 
-            <!--            <p>Total distance: <span id="totalDistance">1000 (hard coded)</span> km</p>-->
-
             <p>Качено от: <span id="cookName" th:text="*{cook.fullName}"></span></p>
-
-            <!--            <h4>Difficulty Level <strong th:text="*{level.ordinal + 1}"></strong>:</h4>-->
-
-            <!--            <div class="level">-->
-            <!--                <p th:each="i : ${#numbers.sequence(0, route.level.ordinal)}">-->
-            <!--                    <img class="level-img" src="/images/difficulty-level.png" alt="">-->
-            <!--                </p>-->
-            <!--            </div>-->
-
-
-            <!--            <div>-->
-            <!--                <h4>Choose picture</h4>-->
-            <!--                <form action="/" method="POST" enctype="multipart/form-data">-->
-            <!--                    <input type="hidden" id="id" name="recipeId">-->
-            <!--                    <div class="form-group">-->
-            <!--                        <label>-->
-            <!--                            <input type="text" name="title">-->
-            <!--                        </label>-->
-            <!--                    </div>-->
-            <!--                    <div class="image-upload">-->
-            <!--                        <label for="picture">-->
-            <!--                            <img src="/images/add-img.png" alt=""/>-->
-            <!--                        </label>-->
-            <!--                        <input style="display: none" id="picture" type="file" name="picture"/>-->
-            <!--                    </div>-->
-            <!--                    <div class="form-group">-->
-            <!--                        <button class="btn-primary rounded">Upload Picture</button>-->
-            <!--                    </div>-->
-            <!--                </form>-->
-            <!--            </div>-->
 
         </section>
 
@@ -54,7 +22,7 @@
             <p>Време за приготвяне: <span id="cookingTime" th:text="*{cookingTime}"></span></p>
             <p>Брой порции: <span id="servings" th:text="*{servings}"></span></p>
 
-            <!--            <h3>Ingredients:</h3>-->
+            <p>Количество - мерна единица - съставка</p>
             <ul>
                 <li th:each="recipeIngredient : ${recipe.recipeIngredientList}">
                     <span th:text="${recipeIngredient.amount}"></span>
@@ -62,20 +30,17 @@
                     <span th:text="${recipeIngredient.measureUnit.type}"></span>
                     <a>-</a>
                     <span th:text="${recipeIngredient.ingredient.name}"></span>
+                    <!--                    <span th:text="${recipe.recipeIngredientList.size()}"></span>-->
                 </li>
             </ul>
+
+
         </section>
 
         <section class="recipe-description text-center">
             <h4>Инструкции:</h4>
             <p id="recipe-description" th:text="*{description}">Description: </p>
         </section>
-
-        <!--        <section class="gallery">-->
-        <!--            <img th:each="picture : *{pictures}"-->
-        <!--                 th:src="'data:' + *{picture.imageType} + ';base64,' + *{picture.imageBytes}">-->
-        <!--        </section>-->
-
 
     </div>
 

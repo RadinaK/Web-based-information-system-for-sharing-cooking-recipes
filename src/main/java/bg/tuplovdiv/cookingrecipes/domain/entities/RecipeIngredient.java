@@ -24,6 +24,13 @@ public class RecipeIngredient extends BaseEntity {
     public RecipeIngredient() {
     }
 
+    public RecipeIngredient(Recipe recipe, Ingredient ingredient, MeasureUnit measureUnit, Double amount) {
+        this.recipe = recipe;
+        this.ingredient = ingredient;
+        this.measureUnit = measureUnit;
+        this.amount = amount;
+    }
+
     public Recipe getRecipe() {
         return recipe;
     }
